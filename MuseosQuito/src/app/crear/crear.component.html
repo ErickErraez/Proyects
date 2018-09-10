@@ -1,0 +1,94 @@
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="card ">
+                <div class="card-header text-center">
+                    <h2>
+                        <b>
+                            Nuevo Negocio
+                        </b>
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <form>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="formGroupExampleInput"> Nombre:</label>
+                                        <input [(ngModel)]="lugar.nombre" name="nombre" type="text" class="form-control"
+                                            id="name" placeholder="Ingrese Nombre">
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="formGroupExampleInput"> Distancia:</label>
+                                        <input [(ngModel)]="lugar.distancia" name="distancia" type="number" class="form-control"
+                                            id="dist" placeholder="Ingrese Distancia">
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="formGroupExampleInput"> Cercania:</label>
+                                        <input [(ngModel)]="lugar.cercania" name="cercania" type="number" class="form-control"
+                                            id="cerc" placeholder="Ingrese Cercania">
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="formGroupExampleInput"> Tipo Plan:</label>
+                                        <input [(ngModel)]="lugar.plan" name="plan" type="text" class="form-control" id="plan"
+                                            placeholder="Ingrese Plan">
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="exampleFormControlTextarea1">Descripcion: </label>
+                                        <textarea [(ngModel)]="lugar.description" name="description" class="form-control"
+                                            id="mensaje" rows="5"></textarea>
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <h4>
+                                            <label for="formGroupExampleInput"> Datos de la Direccion: </label>
+                                        </h4>
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                    <b>
+                                        <label for="formGroupExampleInput">Calle y Numero:</label>
+                                        <input [(ngModel)]="lugar.calle" name="calle" type="text" class="form-control" id="calle"
+                                            placeholder="Ingrese Calle y Numero">
+                                    </b>
+                                </div>
+                                <div class="form-group">
+                                        <b>
+                                            <label for="formGroupExampleInput">Ciudad:</label>
+                                            <input [(ngModel)]="lugar.ciudad" name="ciudad" type="text" class="form-control" id="ciudad"
+                                                placeholder="Ingrese Ciudad">
+                                        </b>
+                                    </div>
+                                    <div class="form-group">
+                                            <b>
+                                                <label for="formGroupExampleInput">Pais:</label>
+                                                <input [(ngModel)]="lugar.pais" name="pais" type="text" class="form-control" id="pais"
+                                                    placeholder="Ingrese Pais">
+                                            </b>
+                                        </div>
+                                <div class="form-group">
+                                    <button type="submit" (click)="guardarLugar()" class="btn btn-primary">Enviar</button>
+                                    <button type="submit" routerLink="/"class="btn btn-danger">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

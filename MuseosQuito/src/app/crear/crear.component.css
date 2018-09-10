@@ -1,0 +1,9 @@
+.card {
+   background-color: rgba(245, 245, 245, 0.562); 
+  }
+.fondo {
+  background-image: url('../../assets/logo.jpg');
+  background-position: 50%50%;
+  background-size: cover;
+  height: 100vh;
+}

@@ -7,10 +7,12 @@
   <div class="row">
     <div class="col-md-8">
       <h2>Lugares Cercanos</h2>
+      <a class="btn btn-primary" routerLink="/crear/new">Crear nuevo Museo</a>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
-          <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action: 'edit'}">
-            <li class="list-group-item" *ngIf="lugar.active">{{lugar.nombre}}</li>
+          <a routerLink="/crear/{{lugar.id}}">
+            <li class="list-group-item">{{lugar.nombre}}</li>
+            <!--*ngIf="lugar.active" -->
           </a>
         </ng-container>
       </ul>
@@ -21,6 +23,7 @@
   </div>
 </div>
 <!--
+  [queryParams]="{action: 'edit'}"
 <ul>
   <ng-container *ngFor="let lugar of lugares; let i = index" [ngSwitch]="lugar.cercania">
     <a>
