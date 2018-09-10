@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">MuseosQuito</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li routerLinkActive="nav-item active">
+        <a class="nav-link" routerLink="/lugares">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li routerLinkActive="nav-item active">
+        <a class="nav-link" routerLink="/detalle">Detalle</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+<!--
+<ul>
+  <ng-container *ngFor="let lugar of lugares; let i = index" [ngSwitch]="lugar.cercania">
+    <a>
+      <li contar-clicks [ngStyle]="{color: (lugar.active) ? 'green' : 'red'}" [ngClass]="{numero_par:(i+1)%2!=0}"
+        [resaltar]="lugar.plan">{{lugar.nombre}}>
+        <span *ngSwitchCase="1" [ngStyle]="{color: 'blue'}">Muy Cerca</span>
+        <span *ngSwitchCase="2" [ngStyle]="{color: 'orange'}">Cercano</span>
+        <span *ngSwitchCase="3" [ngStyle]="{color: 'black'}">Lejano</span>
+      </li>
+    </a>
+  </ng-container>
+</ul>-->
