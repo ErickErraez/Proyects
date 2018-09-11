@@ -1,3 +1,9 @@
 agm-map {
     height: 300px;
   }
+
+  #cuadrado{
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+  }

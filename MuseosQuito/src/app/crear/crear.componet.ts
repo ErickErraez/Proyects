@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LugaresServices } from '../services/lugares.services';
 import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
     selector: 'app-crear',
@@ -37,9 +38,27 @@ export class CrearComponent {
             .subscribe((result) => {
                 this.lugar.lat = result.json().results[0].geometry.location.lat;
                 this.lugar.lng = result.json().results[0].geometry.location.lng;
-                this.lugar.id = Date.now();
-                this.lugarServices.guardarLugar(this.lugar);
-                alert('Negocio guardado con exito!');
+
+                if (this.id != 'new') {
+                    this.lugarServices.editarLugar(this.lugar);
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Negocio editado con exito!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                } else {
+                    this.lugar.id = Date.now();
+                    this.lugarServices.guardarLugar(this.lugar);
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Negocio guardado con exito!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
                 this.lugar = {};
             });
     }

@@ -1,0 +1,11 @@
+Plantilla del Cafe
+https://blackrockdigital.github.io/startbootstrap-business-casual/
+
+Plantilla Agencia
+https://blackrockdigital.github.io/startbootstrap-agency/
+
+OpenStreetMap
+https://github.com/picandocodigo/osm
+
+ALERT 
+https://sweetalert2.github.io/#download

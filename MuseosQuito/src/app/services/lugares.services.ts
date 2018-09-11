@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { AngularFireDatabase } from '@angular/fire/database';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LugaresServices {
+
+    API_ENDPOINT = 'https://museosquito-1536348590463.firebaseio.com';
     lugares: any = [
         { id: 1, plan: 'pagado', cercania: 1, distancia: 1, active: true, nombre: 'Florería la Gardenia', description: 'ESTA ES LA DESCRIPCION 1' },
         { id: 2, plan: 'gratuito', cercania: 1, distancia: 1.8, active: true, nombre: 'Donas la pasadita', description: 'ESTA ES LA DESCRIPCION 2' },
@@ -19,7 +22,11 @@ export class LugaresServices {
 
     public getLugares() {
 
-        return this.aFDB.list('lugares/');
+        return this.http.get(this.API_ENDPOINT + '/.json')
+            .map((resultado) => {
+                const data = resultado.json().lugares;
+                return data;
+            });
     }
 
 
@@ -29,7 +36,14 @@ export class LugaresServices {
     }
 
     public guardarLugar(lugar) {
-        this.aFDB.database.ref('lugares/' + lugar.id).set(lugar);
+        // this.aFDB.database.ref('lugares/' + lugar.id).set(lugar);
+        const headers = new Headers({ "Content-Type": "application/json" });
+        return this.http.post(
+            this.API_ENDPOINT + '/lugares.json',
+            lugar,
+            { headers: headers }
+        ).subscribe();
+
     }
 
     public editarLugar(lugar) {

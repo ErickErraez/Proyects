@@ -1,7 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+  <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
 
+<div id="cuadrado" [@animable]="state"></div>
+<a class="btn btn-primary" (click)="animar()">Animar</a>
 <hr />
 <div class="container">
   <div class="row">
@@ -10,10 +12,17 @@
       <a class="btn btn-primary" routerLink="/crear/new">Crear nuevo Museo</a>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
-          <a routerLink="/crear/{{lugar.id}}">
-            <li class="list-group-item">{{lugar.nombre}}</li>
-            <!--*ngIf="lugar.active" -->
-          </a>
+
+          <li class="list-group-item"><a routerLink="/crear/{{lugar.id}}">
+              <h3>{{lugar.nombre}}</h3>
+            </a>
+            <br>
+            <Small>Fecha Creacion: {{lugar.id | date:'short' | uppercase}}</Small>
+            <br>
+            <p [innerHtml]='lugar.description | prueba'></p>
+          </li>
+          <!--*ngIf="lugar.active" -->
+
         </ng-container>
       </ul>
     </div>
