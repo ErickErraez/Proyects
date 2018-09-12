@@ -9,3 +9,6 @@ https://github.com/picandocodigo/osm
 
 ALERT 
 https://sweetalert2.github.io/#download
+
+ICONOS
+https://fontawesome.com/icons?d=gallery&m=free

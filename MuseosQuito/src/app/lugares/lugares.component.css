@@ -7,3 +7,12 @@ agm-map {
     height: 100px;
     background-color: aquamarine;
   }
+
+  .padding{
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #estrella{
+    color: gold;
+  }

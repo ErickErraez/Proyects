@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
@@ -18,6 +18,10 @@ import { CrearComponent } from './crear/crear.componet';
 import { HttpModule } from '@angular/http';
 import { LinkifystrPipe } from './pipes/Linkifystr.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.componet';
+import { RegistroComponent } from './registro/registro.componet';
+import { AutorizacionServices } from './services/autorizacion.services';
+import { GuardServices } from './services/guard.services';
 
 
 
@@ -26,17 +30,19 @@ const appRoutes: Routes = [
   { path: 'lugares', component: LugaresComponent },
   { path: 'detalle/:id', component: DetalleComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'crear/:id', component: CrearComponent }
+  { path: 'crear/:id', component: CrearComponent, canActivate: [GuardServices] },
+  { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent }
 
 ];
 
-export const firebaseConfig = {
-  apiKey: 'AIzaSyDg8lfUQpFt2HhWGVos3zUNRpTFvk0rcSw',
-  authDomain: 'museosquito-1536348590463.firebaseapp.com',
-  projectId: 'museosquito-1536348590463',
-  databaseURL: 'https://museosquito-1536348590463.firebaseio.com',
-  storageBucket: 'museosquito-1536348590463.appspot.com',
-  messagingSenderId: '715386917153'
+export const config = {
+  apiKey: "AIzaSyDg8lfUQpFt2HhWGVos3zUNRpTFvk0rcSw",
+  authDomain: "museosquito-1536348590463.firebaseapp.com",
+  databaseURL: "https://museosquito-1536348590463.firebaseio.com",
+  projectId: "museosquito-1536348590463",
+  storageBucket: "museosquito-1536348590463.appspot.com",
+  messagingSenderId: "715386917153"
 };
 
 @NgModule({
@@ -48,22 +54,25 @@ export const firebaseConfig = {
     LugaresComponent,
     ContactoComponent,
     CrearComponent,
-    LinkifystrPipe
+    LinkifystrPipe,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     HttpModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdIe0_RP3_1E4c1SXDweqjYk-ZmTEAcqI'
     }),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [LugaresServices],
+  providers: [LugaresServices, AutorizacionServices, GuardServices],
 
   bootstrap: [AppComponent]
 })

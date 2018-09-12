@@ -10,16 +10,12 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     animations: [
         trigger('animable', [
             state('inicial', style({
-                opacity: 0,
-                color: 'red',
-                transform: 'rotate3D(0,0,0,0deg)'
+                opacity: 0
             })),
             state('final', style({
-                opacity: 1,
-                color: 'yellow',
-                transform: 'rotate3D(10,20,30,70deg)'
+                opacity: 1
             })),
-            transition('inicial => final', animate(5000)),
+            transition('inicial => final', animate(3000)),
             transition('final => inicial', animate(2500)),
         ])
     ]
@@ -30,12 +26,8 @@ export class LugaresComponent {
     lat = -0.1967548;
     lng = -78.4817986;
     lugares = null;
-    state = 'final';
-
-    animar() {
-        // tslint:disable-next-line:no-unused-expression
-        this.state = (this.state === 'final') ? 'inicial' : 'final';
-    }
+    state = 'inicial';
+    
     constructor(private lugaresServices: LugaresServices) {
 
         lugaresServices.getLugares()
@@ -45,7 +37,7 @@ export class LugaresComponent {
                 this.lugares = lugares;
                 var me = this;
                 me.lugares = Object.keys(me.lugares).map(function(key) { return me.lugares[key]; });
-
+                this.state = 'final';
             }, error => {
                 console.log(error);
                 swal({
@@ -56,4 +48,16 @@ export class LugaresComponent {
             });
 
     }
+
+    start(e) {
+
+        console.log('Iniciado!');
+        console.log(e);
+    }
+
+    finish(e) {
+        console.log('Terminado!');
+        console.log(e);
+    }
+
 }

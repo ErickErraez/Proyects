@@ -2,32 +2,35 @@
   <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
 
-<div id="cuadrado" [@animable]="state"></div>
-<a class="btn btn-primary" (click)="animar()">Animar</a>
 <hr />
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <h2>Lugares Cercanos</h2>
       <a class="btn btn-primary" routerLink="/crear/new">Crear nuevo Museo</a>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
-
           <li class="list-group-item"><a routerLink="/crear/{{lugar.id}}">
-              <h3>{{lugar.nombre}}</h3>
+              <h3>{{lugar.nombre}} <i id="estrella" class="fas fa-star pull-right"></i>
+              </h3>
             </a>
-            <br>
             <Small>Fecha Creacion: {{lugar.id | date:'short' | uppercase}}</Small>
             <br>
             <p [innerHtml]='lugar.description | prueba'></p>
           </li>
-          <!--*ngIf="lugar.active" -->
-
         </ng-container>
       </ul>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5" [@animable]="state">
       <h2>Destacados</h2>
+      <ng-container *ngFor="let lugar of lugares">
+        <div class="alert-warning padding" *ngIf="lugar.plan == 'Pagado'"><a routerLink="/crear/{{lugar.id}}">
+            <h3>{{lugar.nombre}}</h3>
+          </a>
+          <br>
+          <p [innerHtml]='lugar.description | prueba'></p>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

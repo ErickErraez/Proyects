@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { LugaresServices } from '../services/lugares.services';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+// tslint:disable-next-line:import-blacklist
+import 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'app-crear',
@@ -12,10 +17,11 @@ import swal from 'sweetalert2';
 export class CrearComponent {
 
     lugar: any = {};
-
     id: any = null;
+    results$: Observable<any>;
+    private searchField: FormControl;
 
-    constructor(private root: ActivatedRoute, private lugarServices: LugaresServices) {
+    constructor(private root: ActivatedRoute, private http: Http, private lugarServices: LugaresServices) {
 
         this.id = this.root.snapshot.params['id'];
         console.log(this.id);
@@ -26,10 +32,12 @@ export class CrearComponent {
                 });
         }
 
-    }
-
-    regresar() {
-        this.lugar = {};
+        const URL = 'https://maps.google.com/maps/api/geocode/json';
+        this.searchField = new FormControl();
+        this.results$ = this.searchField.valueChanges
+            .switchMap(query => this.http.get(`${URL}?address=${query}`))
+            .map(response => response.json())
+            .map(response => response.results);
     }
 
     guardarLugar() {

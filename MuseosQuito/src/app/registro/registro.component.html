@@ -1,0 +1,60 @@
+<div class="fondo">
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 text-center">
+                <div class="card ">
+                    <div class="card-header text-center">
+                        <h2>
+                            <b>
+                                Registro de Usuarios
+                            </b>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <form>
+                                    <div class="form-group text-left">
+                                        <h5>
+                                            <b>
+                                                <i id="iconEmail" class="fas fa-envelope"></i>
+                                                <label for="formGroupExampleInput"><span>..</span> Correo Electrónico:</label>
+                                                <input type="email" name="email" class="form-control" id="email"
+                                                    placeholder="Ingrese Correo" [(ngModel)]="registro.email" required>
+                                            </b>
+                                        </h5>
+                                    </div>
+                                    <div class="form-group text-left">
+                                        <h5>
+                                            <b>
+                                                <i id="iconPass" class="fas fa-key"></i>
+                                                <label for="formGroupExampleInput"><span>..</span> Contraseña:</label>
+                                                <input type="password" name="password" class="form-control" id="name"
+                                                    placeholder="Ingrese Nombre" [(ngModel)]="registro.password"
+                                                    minlength="6" required>
+                                                <h6 Id="Contenido" name = "test"></h6>
+                                            </b>
+                                        </h5>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <button type="submit" (click)="registrar()" class="btn btn-primary">Registrar</button>
+                                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <b>
+                            <a routerLink="/login"> Ya tengo una Cuenta</a>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
