@@ -58,15 +58,16 @@
                                         <h4>
                                             <label for="formGroupExampleInput"> Datos de la Direccion: </label>
                                         </h4>
-                                        <div class="well">
+                                        <div class="col-12">
                                             <form>
                                                 <label>
                                                     <h6>Buscar Direccion en Google Maps</h6>
                                                     <input type="text" [formControl]="searchField" class="form-control">
                                                 </label>
                                             </form>
-                                            <ul class="list-group"></ul>
-                                            <li class="list-group-item" *ngFor="let result of results$ | async">{{result.formatted_address}}</li>
+                                            <ul class="list-group">
+                                                <li class="list-group-item" *ngFor="let result of results$ | async" (click)="seleccionarDireccion(result)" >{{result.formatted_address}}</li>
+                                            </ul>
                                         </div>
                                     </b>
                                 </div>

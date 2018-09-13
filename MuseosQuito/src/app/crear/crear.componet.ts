@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { LugaresServices } from '../services/lugares.services';
-import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
-// tslint:disable-next-line:import-blacklist
-import 'rxjs/Rx';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import 'rxjs/Rx';
 import { FormControl } from '@angular/forms';
 import { Http } from '@angular/http';
+
 
 @Component({
     selector: 'app-crear',
@@ -31,6 +31,7 @@ export class CrearComponent {
                     this.lugar = lugar;
                 });
         }
+
 
         const URL = 'https://maps.google.com/maps/api/geocode/json';
         this.searchField = new FormControl();
@@ -69,6 +70,13 @@ export class CrearComponent {
                 }
                 this.lugar = {};
             });
+    }
+
+    seleccionarDireccion(direccion) {
+        console.log(direccion);
+        this.lugar.calle = direccion.address_components[1].long_name + ' ' + direccion.address_components[0].long_name;
+        this.lugar.ciudad = direccion.address_components[2].long_name;
+        this.lugar.pais = direccion.address_components[5].long_name;
     }
 
 }

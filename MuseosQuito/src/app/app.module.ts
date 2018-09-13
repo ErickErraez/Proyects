@@ -68,7 +68,7 @@ export const config = {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdIe0_RP3_1E4c1SXDweqjYk-ZmTEAcqI'
+      apiKey: 'AIzaSyC5Cd6Tiu3oqs69v1GDk5_aTCwOk8B8ZIM'
     }),
     RouterModule.forRoot(appRoutes)
   ],

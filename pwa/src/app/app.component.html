@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+  <span>My Application</span>
+</mat-toolbar>
+
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }} v4!
+  </h1>
+  <img width="300" alt="Angular Logo"
+       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Nota
+      </mat-panel-title>
+      <mat-panel-description>
+        Crear o Editar una nota
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="Titulo de la nota">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Categoria">
+        <mat-option *ngFor="let cat of categorias" [value]="cat">
+          {{cat}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Cuerpo de la Nota"></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button color="warn">Click me!</button>
+  </mat-expansion-panel>
+
+  <mat-list>
+    <mat-list-item>
+      <h3 matLine> Titulo 1 </h3>
+      <p matLine> Cuerpo 1 </p>
+      <p matLine class="demo-2"> Categoria 1 </p>
+    </mat-list-item>
+    <mat-list-item>
+      <h3 matLine> Titulo 2 </h3>
+      <p matLine> Cuerpo 2 </p>
+      <p matLine class="demo-2"> Categoria 2 </p>
+    </mat-list-item>
+    <mat-list-item>
+      <h3 matLine> Titulo 3 </h3>
+      <p matLine> Cuerpo 3 </p>
+      <p matLine class="demo-2"> Categoria 3 </p>
+    </mat-list-item>
+  </mat-list>
+
+</mat-accordion>
+
+
