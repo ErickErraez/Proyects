@@ -56,6 +56,7 @@ export const config = {
     CrearComponent,
     LinkifystrPipe,
     LoginComponent,
+    MdTool
     RegistroComponent
   ],
   imports: [

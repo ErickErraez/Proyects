@@ -14,11 +14,17 @@ import {
   MatInputModule,
   MatButtonModule,
   MatSelectModule,
-  MatListModule
+  MatListModule,
+  MatSnackBarModule, MatIconModule
 } from '@angular/material';
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {FormsModule} from '@angular/forms';
+import {NotesServices} from '../services/notes.services';
+import {AuthService} from '../services/auth.services';
+import {MessagingService} from "../services/messagin.services";
+
 
 const config: any = {
   apiKey: 'AIzaSyDhycKmf1rP8qP2XZym1HjI1oj0KfVVxf4',
@@ -43,15 +49,17 @@ const config: any = {
     MatButtonModule,
     MatSelectModule,
     MatListModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FormsModule,
+    MatIconModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-
   ],
-  providers: [],
+  providers: [NotesServices, AuthService, MessagingService],
   bootstrap:
     [AppComponent]
 })
