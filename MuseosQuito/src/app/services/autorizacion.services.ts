@@ -15,7 +15,6 @@ export class AutorizacionServices {
     public facebookLogin() {
         this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
             .then((result) => {
-                console.log(result);
                 alert('Logeado con Facebook');
                 this.router.navigate(['lugares']);
             })
