@@ -1,0 +1,1 @@
+Crea un page “Acerca de” donde pongas datos acerca de tu aplicación y sobre ti (el desarrollador).
