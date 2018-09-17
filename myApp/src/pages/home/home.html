@@ -11,11 +11,10 @@
   <button ion-button (click)="goToConversation()">Ir a Conversation</button>
   <button ion-button (click)="goToLogin()">Ir a Login</button>
   <h3>Amigos</h3>
-  <ng-container *ngFor="let user of friends; let i = index">
-
-    <p *ngIf="user.friend">
-      {{ i }}. {{ user.nick }} - {{ user.email }}
-    </p>
+  <ng-container *ngFor="let user of this.friends">
+    <div *ngIf="user.friend">
+      <p (click)="goToConversation(user.id)">{{user.nick}} - {{user.nick}}</p>
+    </div>
   </ng-container>
   <h3>No Agregados</h3>
   <ng-container *ngFor="let user of friends; let i = index">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { User } from '../../interfaces/user';
 
 /**
  * Generated class for the ConversationPage page.
@@ -16,7 +17,12 @@ import { HomePage } from '../home/home';
 })
 export class ConversationPage {
 
+  user: User;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+    this.user = this.navParams.get("user");
+    console.log("User", this.user);
   }
 
   ionViewDidLoad() {

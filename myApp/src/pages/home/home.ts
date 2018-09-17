@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from "../login/login";
 import { ConversationPage } from "../conversation/conversation";
 import { User } from "../../interfaces/user";
@@ -11,7 +11,7 @@ import { User } from "../../interfaces/user";
 export class HomePage {
 
   friends: User[];
-
+  
   constructor(public navCtrl: NavController) {
     let usuario1: User = {
       nick: 'Marco1',
@@ -27,7 +27,7 @@ export class HomePage {
       age: 18,
       email: 'Marco@gmail.com',
       friend: false,
-      uid: 1
+      uid: 2
     };
     let usuario3: User = {
       nick: 'Marco3',
@@ -35,7 +35,7 @@ export class HomePage {
       age: 18,
       email: 'Marco@gmail.com',
       friend: true,
-      uid: 1
+      uid: 3
     };
     let usuario4: User = {
       nick: 'Marco4',
@@ -43,7 +43,7 @@ export class HomePage {
       age: 18,
       email: 'Marco@gmail.com',
       friend: false,
-      uid: 1
+      uid: 4
     };
     let usuario5: User = {
       nick: 'Marco5',
@@ -51,17 +51,18 @@ export class HomePage {
       age: 18,
       email: 'Marco@gmail.com',
       friend: true,
-      uid: 1
+      uid: 5
     };
 
     this.friends = [usuario1, usuario2, usuario3, usuario4, usuario5];
 
+
   }
 
 
-  goToConversation() {
-    this.navCtrl.push(ConversationPage);
-  }
+  goToConversation(user: User){
+    this.navCtrl.push(ConversationPage,{'user':user});
+    }
 
   goToLogin() {
     this.navCtrl.push(LoginPage);
