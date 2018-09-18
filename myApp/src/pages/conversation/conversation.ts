@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { User } from '../../interfaces/user';
+import { ServicesUserProvider } from '../../providers/services-user/services-user';
 
 /**
  * Generated class for the ConversationPage page.
@@ -18,15 +19,14 @@ import { User } from '../../interfaces/user';
 export class ConversationPage {
 
   user: User;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  friends: User[];
+  friend: User;
 
-
-    this.user = this.navParams.get("user");
-    console.log("User", this.user);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ConversationPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: ServicesUserProvider) {
+    this.friend = this.navParams.get("user");
+    console.log(this.friend);
+    debugger;
+    //this.friends = this.userProvider.get();
   }
 
   goBack() {

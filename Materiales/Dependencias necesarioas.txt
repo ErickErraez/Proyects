@@ -1,0 +1,5 @@
+npm install angularfire2 firebase promise-polyfill --save
+
+npm i rxjs@6 rxjs-compat@6 promise-polyfill --save
+
+

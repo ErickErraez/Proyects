@@ -6,11 +6,28 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { ConversationPage } from '../pages/conversation/conversation';
 import { ProfilePage } from '../pages/profile/profile';
+import { ServicesUserProvider } from '../providers/services-user/services-user';
+import { SearchPipe } from '../pipes/search';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../providers/services-user/services-auth';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBY8hKyelzenloXFG6de56yKFS4UZHli4U",
+  authDomain: "yavzinger.firebaseapp.com",
+  databaseURL: "https://yavzinger.firebaseio.com",
+  projectId: "yavzinger",
+  storageBucket: "yavzinger.appspot.com",
+  messagingSenderId: "14622928629"
+};
 
 @NgModule({
   declarations: [
@@ -19,11 +36,16 @@ import { ProfilePage } from '../pages/profile/profile';
     ListPage,
     LoginPage,
     ConversationPage,
-    ProfilePage
+    ProfilePage,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,12 +54,15 @@ import { ProfilePage } from '../pages/profile/profile';
     ListPage,
     LoginPage,
     ConversationPage,
-    ProfilePage
+    ProfilePage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    AngularFireDatabase,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ServicesUserProvider,
+    AuthService
   ]
 })
 export class AppModule { }
