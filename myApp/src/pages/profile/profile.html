@@ -35,29 +35,26 @@
     </ion-row>
   </ion-grid>
 
-  <ion-item color='personal' *ngIf="operation === 'register'">
+  <ion-list *ngIf="user">
+
+    <ion-item color='personal'>
       <ion-label floating color="dark">Nick</ion-label>
-      <ion-input type="text" [(ngModel)]="nick" name="nick"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.nick" name="nick"></ion-input>
+    </ion-item>
+
+    <ion-item color='personal'>
+      <ion-label floating color="dark">Subnick</ion-label>
+      <ion-input type="text" [(ngModel)]="user.subnick" name="subnick"></ion-input>
     </ion-item>
 
     <ion-item color='personal'>
       <ion-label floating color="dark">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal'>
-      <ion-label floating color="dark">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal' *ngIf="operation === 'register'">
-      <ion-label floating color="dark">Repetir Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password2" name="password2"></ion-input>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" disabled></ion-input>
     </ion-item>
 
     <ion-item color='personal'>
       <ion-label floating color="dark">Status</ion-label>
-      <ion-select [(ngModel)]="status" name="status">
+      <ion-select [(ngModel)]="user.status" name="status">
         <ion-option value="Online">Conectado</ion-option>
         <ion-option value="Away">Ausente</ion-option>
         <ion-option value="Busy">Ocupado</ion-option>
@@ -65,8 +62,8 @@
       </ion-select>
     </ion-item>
 
-
   </ion-list>
 
-  <a ion-button full>Guardar</a>
+  <button ion-button full (click)="guardarPerfil()">Guardar</button>
+
 </ion-content>

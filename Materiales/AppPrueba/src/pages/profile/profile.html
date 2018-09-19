@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="backgroudSocial bposy0">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <div class="avatarFrameonline">
+          <img *ngIf="user" src="{{user.avatar || '../../../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="marto15">
+      <ion-col col-6>
+        <br />
+        <span>Cambiar Foto</span>
+      </ion-col>
+      <ion-col col-6>
+        <a ion-button>
+          <ion-icon name="camera" (click)="takePicture('camera')"></ion-icon>
+        </a>
+        <a ion-button>
+          <ion-icon name="images" (click)="takePicture('album')"></ion-icon>
+        </a>
+        <a ion-button (click)="getLocation()">
+          <ion-icon name="navigate" ></ion-icon>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="user">
+
+    <ion-item color='personal'>
+      <ion-label floating color="dark">Nick</ion-label>
+      <ion-input type="text" [(ngModel)]="user.nick" name="nick"></ion-input>
+    </ion-item>
+
+    <ion-item color='personal'>
+      <ion-label floating color="dark">Subnick</ion-label>
+      <ion-input type="text" [(ngModel)]="user.subnick" name="subnick"></ion-input>
+    </ion-item>
+
+    <ion-item color='personal'>
+      <ion-label floating color="dark">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" disabled></ion-input>
+    </ion-item>
+
+    <ion-item color='personal'>
+      <ion-label floating color="dark">Status</ion-label>
+      <ion-select [(ngModel)]="user.status" name="status">
+        <ion-option value="Online">Conectado</ion-option>
+        <ion-option value="Away">Ausente</ion-option>
+        <ion-option value="Busy">Ocupado</ion-option>
+        <ion-option value="AppearOffline">Desconectado</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button full (click)="guardarPerfil()">Guardar</button>
+
+</ion-content>
