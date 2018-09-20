@@ -1,12 +1,10 @@
 <ion-header>
-
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Perfil</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -19,23 +17,25 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row class="marto15">
-      <ion-col col-6>
-        <br />
+  <ion-row>
+    
+    <ion-item color='personal'>
+        <ion-col col-4>
         <span>Cambiar Foto</span>
       </ion-col>
-      <ion-col col-6>
-        <a ion-button>
-          <ion-icon name="camera" (click)="takePicture('camera')"></ion-icon>
-        </a>
-        <a ion-button>
-          <ion-icon name="images" (click)="takePicture('album')"></ion-icon>
-        </a>
-        <a ion-button (click)="getLocation()">
-          <ion-icon name="navigate" ></ion-icon>
-        </a>
+       <ion-col col-8>
+          <ion-col col-2>
+            <ion-icon class="camera" name="camera" (click)="takePicture('camera')"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+             <ion-icon class="album" name="images" (click)="takePicture('album')"></ion-icon>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon class="ubicacion" name="navigate" (click)="getLocation()"></ion-icon>
+          </ion-col>
       </ion-col>
-    </ion-row>
+    </ion-item>
+  </ion-row>
   </ion-grid>
 
   <ion-list *ngIf="user">
@@ -65,8 +65,15 @@
       </ion-select>
     </ion-item>
 
+    <ion-item color='personal' *ngIf="position">
+        <ion-label floating color="dark">Direccion:</ion-label>
+        <ion-input type="email" [(ngModel)]="this.position" name="this.position" style="font: size 1px;"></ion-input>
+    </ion-item>
+
   </ion-list>
 
   <button ion-button full (click)="guardarPerfil()">Guardar</button>
+  <button ion-button full (click)="logout()">Cerrar Sesion</button>
+
 
 </ion-content>

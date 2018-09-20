@@ -67,7 +67,7 @@ export class LoginPage {
         position: 'bottom'
       });
       toast.present();
-      this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(HomePage);
     }).catch((error) => {
       alert('Ocurrió un error');
       console.log(error);

@@ -21,4 +21,8 @@ export class AuthService {
     return this.firebaseAuth.authState;
   }
 
+  logout() {
+    return this.firebaseAuth.auth.signOut();
+  }
+
 }

@@ -5,7 +5,7 @@
     </button>
     <ion-title>Home</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="royal">
+      <button ion-button icon-only color="royal" (click)="sendRequest()">
         <img src="../../assets/img/logo_live_add.png" class="icon-in-button">
       </button>
     </ion-buttons>
@@ -37,16 +37,19 @@
   </div>
   <br>
   <div>
-
-    <div *ngIf="friends">
+   <div *ngIf="this.user && this.user.friends">
       <div>
-        <b>Amigos ({{friends.length}}/{{friends.length}})</b>
+        <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
       </div>
-      <div class="contacListItem" *ngFor="let user of friends | search: query" (click)="goToConversation(user)">
+      <!-- <div class="contacListItem" *ngFor="let user of friends | search: query" (click)="goToConversation(user)">
         <img src="../../assets/img/{{getIconByStatus(user.status)}}" class="status">
-        <b>{{user.nick}}</b> <i class="msnicon brb"></i>
+        <b>{{user}}</b> <i class="msnicon brb"></i>
         <small *ngIf="user.status">{{user.status}}</small>
-      </div>
+      </div>-->
+    </div>
+
+    <div *ngFor="let user of user.friends">
+      {{user}}
     </div>
 
   </div>

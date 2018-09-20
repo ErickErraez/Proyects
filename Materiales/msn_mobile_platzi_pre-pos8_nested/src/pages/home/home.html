@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="sendRequest()">
+        <img src="assets/img/logo_live_add.png" class="icon-in-button">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundAmsnImg bluewhitebluebg">
+  <ion-grid id="homeMeContainer">
+    <ion-row>
+      <ion-col col-3>
+        <div class="avatarFrameonline">
+          <img src="assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        </div>
+      </ion-col>
+      <ion-col col-9 padding>
+        Nick<br />
+        <span>Subnick</span>
+        <br />
+        <small>eduardo@gobae.com</small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="searchBoxContainer">
+    <ion-input type="search" id="searchField" placeholder="Busca entre tus Contactos" [(ngModel)]="query"></ion-input>
+  </div>
+
+  <div *ngIf="user && user.friends">
+    <div>
+      <fa name="chevron-down"></fa>
+      <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
+    </div>
+    <!--<div class="contact-list-item" *ngFor="let user of users | search: query" (click)="goToConversation(user)">
+      <img src="assets/img/{{getIconByStatus(user.status)}}" class="status">
+      <b>{{user.nick}}</b> <i class="msnicon brb"></i>
+      <small *ngIf="user.status">{{user.status}}</small>
+    </div>-->
+    <div *ngFor="let user of user.friends">
+      <friend [uid]="user"></friend>
+    </div>
+  </div>
+</ion-content>

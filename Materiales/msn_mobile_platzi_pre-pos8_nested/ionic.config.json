@@ -1,0 +1,7 @@
+{
+  "name": "msn_mobile_platzi_pre",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
