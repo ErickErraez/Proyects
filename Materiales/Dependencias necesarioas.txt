@@ -3,6 +3,18 @@ npm install angularfire2 firebase promise-polyfill --save
 npm i rxjs@6 rxjs-compat@6 promise-polyfill --save
 
 
+
+
+
 camera ionic
 geolocation ionic
 vibration ionic
+
+
+Intentar subir a hsting en la casa
+npm install -g firebase-tools
+
+
+
+link de firebase
+https://yavzinger.firebaseapp.com/

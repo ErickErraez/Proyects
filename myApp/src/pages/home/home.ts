@@ -67,7 +67,7 @@ export class HomePage {
           handler: data => {
             const request = {
               timestamp: Date.now(),
-              receiver_email: data.email,
+              receiverEmail: data.email,
               sender: this.user,
               status: 'pending'
             };

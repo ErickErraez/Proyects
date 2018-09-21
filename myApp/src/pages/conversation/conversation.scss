@@ -1,8 +1,26 @@
 page-conversation {
   .footbarInput {
-    background-color: white !important;
-    border: 1px solid #ededed !important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 20px;
+    border: 1px solid #006eff;
+    padding: 0 4px 0 4px;
+  }
+  .prueba {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: darkcyan;
+    text-decoration-color: sienna;
+    padding: 0 4px 0 4px;
   }
 
-
+  .prueba1 {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: slateblue;
+    text-decoration-color: sienna;
+    padding: 0 4px 0 4px;
+  }
 }

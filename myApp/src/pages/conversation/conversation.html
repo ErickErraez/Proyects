@@ -41,7 +41,10 @@
 
   <div class="message" *ngFor="let message of conversation">
     <div *ngIf="message.type==='text'">
-      <b>{{getUserNickById(message.sender)}}</b> dice: {{message.content}}
+      <b><label class="prueba" >{{getUserNickById(message.recevided)}}</label></b>
+    <br>
+    <b><label class="prueba1">{{getUserNickById(message.sender)}}</label></b> dice: {{message.content}}
+    
     </div>
     <div *ngIf="message.type==='zumbido'">
       <b>{{getUserNickById(message.sender)}}</b> dice: Ha enviado un Zumbido
@@ -55,7 +58,7 @@
     <ion-input type="text" [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()" class="footbarInput"
       autofocus></ion-input>
     <ion-buttons end>
-      <button ion-button icon-only color="royal" (click)="sendMessage()">
+      <button ion-button icon-only color="primary" (click)="sendMessage()">
         <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>
