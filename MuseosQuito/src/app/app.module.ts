@@ -16,7 +16,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/da
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CrearComponent } from './crear/crear.componet';
 import { HttpModule } from '@angular/http';
-import { LinkifystrPipe } from './pipes/Linkifystr.pipe';
+import { LinkifystrPipe } from './pipes/linkifystr.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.componet';
 import { RegistroComponent } from './registro/registro.componet';
@@ -56,7 +56,6 @@ export const config = {
     CrearComponent,
     LinkifystrPipe,
     LoginComponent,
-    MdTool
     RegistroComponent
   ],
   imports: [

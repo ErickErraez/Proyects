@@ -25,9 +25,12 @@ export class LoginPage {
   status: Status;
   nick: string;
   operation: string = 'login';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: ServicesUserProvider, private toastCtrl: ToastController) {
   }
+
   registerWithEmail() {
+
     if (this.password !== this.password2) {
       alert('Las contraseñas no coinciden');
       return;
@@ -58,6 +61,7 @@ export class LoginPage {
       console.log(error);
     });
   }
+
   loginWithEmail() {
     this.authService.loginWithEmail(this.email, this.password).then((data) => {
       console.log(data);
@@ -73,6 +77,8 @@ export class LoginPage {
       console.log(error);
     })
   }
+
+
   facebookAuth() {
     this.authService.facebookAuth().then((data) => {
       console.log(data);
@@ -110,14 +116,4 @@ export class LoginPage {
       console.log(error);
     })
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-  goToHome() {
-    this.navCtrl.setRoot(HomePage);
-  }
-  backToHome() {
-    this.navCtrl.pop();
-  }
-
 }

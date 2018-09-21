@@ -16,6 +16,7 @@ export class HomePage {
   status: Status;
 
   constructor(public navCtrl: NavController, public userService: ServicesUserProvider) {
+
     const usersObservable = this.userService.get();
     usersObservable.valueChanges().subscribe((data: User[]) => {
       console.log("prueba");
@@ -25,6 +26,7 @@ export class HomePage {
       alert('Ocurrió un error');
       console.log(error);
     });
+    
   }
 
   goToConversation(user: User) {
