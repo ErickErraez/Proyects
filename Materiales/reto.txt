@@ -1,1 +1,6 @@
 Crea un page “Acerca de” donde pongas datos acerca de tu aplicación y sobre ti (el desarrollador).
+
+
+
+RETO NUEVO
+Implementar el envio de fotos en el conversation

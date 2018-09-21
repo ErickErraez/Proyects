@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="friend">
+      <span class="userName">{{friend.nick}}</span> ({{friend.status}})
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [ngClass]="{'shaker': shake}">
+  <div class="bgWhite" margin padding>
+    <div class="messageGroup">
+      <ng-container>
+
+      </ng-container>
+    </div>
+  </div>
+
+  <ion-fab right middle>
+    <button ion-fab><ion-icon name="send"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button outline ion-fab (click)="sendZumbido()">
+        <ion-label>Enviar Zumbido</ion-label>
+        <img src="assets/img/zumbido.png" alt="">
+      </button>
+    </ion-fab-list>
+    <ion-fab-list side="bottom">
+      <button color="dark" ion-fab>
+        <ion-label>Enviar Foto</ion-label>
+        <ion-icon name="camera"></ion-icon></button>
+      <button color="dark" ion-fab>
+        <ion-label>Enviar desde Album</ion-label>
+        <ion-icon name="images"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div class="message" *ngFor="let m of conversation">
+    <div *ngIf="m.type === 'text'">
+      <b>{{getUserNickById(m.sender)}}</b> dice: {{m.text}}
+    </div>
+    <div *ngIf="m.type === 'zumbido'">
+      <b>{{getUserNickById(m.sender)}}</b> ha enviado un zumbido
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="message" type="text" class="footbarInput" (keyup.enter)="sendMessage()" autofocus></ion-input>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

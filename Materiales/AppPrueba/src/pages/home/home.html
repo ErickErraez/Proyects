@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="sendRequest()">
+        <img src="../../assets/img/logo_live_add.png" class="icon-in-button">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgroundAmsnImg bluewhitebluebg">
+
+  <ion-grid id="homeContainer">
+    <ion-row>
+      <ion-col col-3>
+        <div class="avatarFrameonline">
+          <img src="../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        </div>
+      </ion-col>
+      <ion-col col-9>
+        nick <br>
+        <small>Subnick</small> <br>
+        <small><b>edg.erraez@yavirac.edu.ec</b></small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div>
+    <ion-item>
+      <ion-label floating>Buscar entre tus contactos</ion-label>
+      <ion-input type="search" [(ngModel)]="query" name="query"></ion-input>
+    </ion-item>
+  </div>
+  <br>
+  <div>
+   <div *ngIf="this.user && this.user.friends">
+      <div>
+        <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
+      </div>
+      <!-- <div class="contacListItem" *ngFor="let user of friends | search: query" (click)="goToConversation(user)">
+        <img src="../../assets/img/{{getIconByStatus(user.status)}}" class="status">
+        <b>{{user}}</b> <i class="msnicon brb"></i>
+        <small *ngIf="user.status">{{user.status}}</small>
+      </div>-->
+    </div>
+
+    <div *ngFor="let user of user.friends">
+      {{user}}
+    </div>
+
+  </div>
+
+
+
+  <!--<ion-list>
+
+    <ng-container *ngFor="let user of this.friends | search: query">
+      <ion-item *ngIf="user.status !== 'Offline'" (click)="goToConversation(user)">
+        {{ user.name }} - {{user.status}}
+      </ion-item>
+    </ng-container>
+
+  </ion-list>-->
+
+</ion-content>
