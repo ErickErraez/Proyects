@@ -7,15 +7,9 @@ import { HomePage } from "../pages/home/home";
 import { ListPage } from "../pages/list/list";
 
 import { AngularFireModule } from "@angular/fire";
-import {
-  AngularFireDatabaseModule,
-  AngularFireDatabase
-} from "@angular/fire/database";
+import { AngularFireDatabaseModule, AngularFireDatabase } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
-import {
-  AngularFireStorageModule,
-  AngularFireStorage
-} from "@angular/fire/storage";
+import { AngularFireStorageModule, AngularFireStorage } from "@angular/fire/storage";
 import { HttpClientModule } from "@angular/common/http";
 
 import { StatusBar } from "@ionic-native/status-bar";
@@ -32,6 +26,7 @@ import { Vibration } from "@ionic-native/vibration";
 import { Geolocation } from "@ionic-native/geolocation";
 import { ConversationProvider } from "../providers/services-user/conversation";
 import { RequestProvider } from '../providers/services-user/request';
+import { ComponentsModule } from '../components/components.module';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBY8hKyelzenloXFG6de56yKFS4UZHli4U",
@@ -60,7 +55,8 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

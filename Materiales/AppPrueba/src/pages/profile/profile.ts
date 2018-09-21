@@ -1,91 +1,51 @@
-import { Component } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ToastController
-} from "ionic-angular";
-import { User, Status } from "../../interfaces/user";
-import { AuthService } from "../../providers/services-user/services-auth";
-import { ServicesUserProvider } from "../../providers/services-user/services-user";
-import { Camera, CameraOptions } from "@ionic-native/camera";
-import { HttpClient } from "@angular/common/http";
-import { Geolocation } from "@ionic-native/geolocation";
-import { LoginPage } from '../login/login';
+import { Component } from '@angular/core';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {User} from "../../interfaces/user";
+import {AuthService} from "../../services/auth";
+import {UserService} from "../../services/user";
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Geolocation} from "@ionic-native/geolocation";
+import {HttpClient} from "@angular/common/http";
+
+/**
+ * Generated class for the ProfilePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: "page-profile",
-  templateUrl: "profile.html"
+  selector: 'page-profile',
+  templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  user: User = {
-    nick: "",
-    status: Status.Online,
-    active: true,
-    email: "",
-    uid: "",
-    direccion: ""
-  };
-
-  status = Status;
-  currentPictureId: any = {};
-  position: any;
-  //aumentar GEOLOCATION
-
-  constructor(
-    public camera: Camera,
-    public geolocation: Geolocation,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private authService: AuthService,
-    public userServices: ServicesUserProvider,
-    private httpClient: HttpClient
-  ) {
-    this.authService.getStatus().subscribe(
-      data => {
-        this.userServices
-          .getById(data.uid)
-          .valueChanges()
-          .subscribe(
-            (user: any) => {
-              this.user = user;
-              console.log(this.user);
-            },
-            error => {
-              console.log(error);
-            }
-          );
-      },
-      error => {
+  user: User;
+  pictureId: any;
+  location: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthService, private userService: UserService, private camera: Camera, private toastCtrl: ToastController, private geolocation: Geolocation, private httpClient: HttpClient) {
+    this.authService.getStatus().subscribe((data) => {
+      this.userService.getById(data.uid).valueChanges().subscribe((user: any) => {
+        this.user = user;
+        console.log(this.user);
+      }, (error) => {
         console.log(error);
-      }
-    );
+      })
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad ProfilePage");
+    console.log('ionViewDidLoad ProfilePage');
   }
-
-  guardarPerfil() {
-    if (this.position) {
-      this.user.direccion = this.position;
-    }
-    this.userServices
-      .update(this.user)
-      .then(data => {
-        console.log(data);
-        let toast = this.toastCtrl.create({
-          message: "Usuario editado con éxito",
-          duration: 3000,
-          position: "bottom"
-        });
-        toast.present();
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  saveData() {
+    this.userService.edit(this.user).then((data) => {
+      alert('Usuario editado');
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   async takePicture(source) {
@@ -99,70 +59,41 @@ export class ProfilePage {
         mediaType: this.camera.MediaType.PICTURE,
         allowEdit: true
       };
-      cameraOptions.sourceType =
-        source == "camera"
-          ? this.camera.PictureSourceType.CAMERA
-          : this.camera.PictureSourceType.PHOTOLIBRARY;
+      cameraOptions.sourceType = (source === 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
       const result = await this.camera.getPicture(cameraOptions);
-      const image = "data:image/jpeg;base64,${result}";
-      this.currentPictureId = Date.now();
-      this.userServices
-        .uploadPicture(this.currentPictureId + ".jpg", image)
-        .then(data => {
-          this.userServices
-            .getDownloadURL(this.currentPictureId + ".jpg")
-            .subscribe(
-              url => {
-                this.user.avatar = url;
-                let toast = this.toastCtrl.create({
-                  message: "Foto subida con exito",
-                  duration: 3000,
-                  position: "bottom"
-                });
-                toast.present();
-              },
-              error => {
-                console.log(error);
-              }
-            );
-        })
-        .catch(error => {
+      const image = 'data:image/jpeg;base64,' + result;
+      this.pictureId = Date.now();
+      this.userService.uploadPicture(this.pictureId + '.jpg', image).then((data) => {
+        this.userService.getDownloadURL(this.pictureId + '.jpg').subscribe((url) => {
+          this.user.avatar = url;
+          let toast = this.toastCtrl.create({
+            message: 'Foto subida',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+        }, (error) => {
           console.log(error);
-        });
-    } catch (e) {
+        })
+      }).catch((error) => {
+        console.log(error);
+      });
+    } catch(e) {
       console.error(e);
     }
   }
-
-  logout() {
-    this.authService.logout();
-    this.navCtrl.setRoot(LoginPage);
-  }
-
   getLocation() {
-    this.geolocation
-      .getCurrentPosition()
-      .then(resp => {
-        this.httpClient
-          .get(
-            "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-            resp.coords.latitude +
-            "," +
-            resp.coords.longitude +
-            "&sensor=true&key=AIzaSyC5Cd6Tiu3oqs69v1GDk5_aTCwOk8B8ZIM"
-          )
-          .subscribe(
-            (data: any) => {
-              console.log(data.results[0].formatted_address);
-              this.position = data.results[0].formatted_address;
-            },
-            error => {
-              console.log(error);
-            }
-          );
+    console.log('ok');
+    this.geolocation.getCurrentPosition().then((response) => {
+      console.log(response);
+      this.location = response;
+      this.httpClient.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.location.coords.latitude+','+this.location.coords.longitude+'&sensor=true/false').subscribe((data) => {
+        console.log(data);
+      }, (error) => {
+        console.log(error);
       })
-      .catch(error => {
-        console.log("Error getting location", error);
-      });
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 }

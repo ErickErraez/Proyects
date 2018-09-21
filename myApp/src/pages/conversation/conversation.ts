@@ -23,7 +23,7 @@ export class ConversationPage {
 
   constructor(public navCtrl: NavController, public authService: AuthService, public vibration: Vibration, public navParams: NavParams, private userProvider: ServicesUserProvider, public conversationServices: ConversationProvider) {
 
-    this.friend = this.navParams.get("user");
+    this.friend = this.navParams.get("data");
     console.log(this.friend);
     this.authService.getStatus().subscribe(
       data => {
@@ -82,7 +82,7 @@ export class ConversationPage {
     const audio = new Audio('../assets/sound/zumbido.m4a');
     audio.play();
     this.shake = true;
-    this.vibration.vibrate([200,80,150]);//expresado en milisegundos
+    this.vibration.vibrate([2000,800,1500]);//expresado en milisegundos
     window.setTimeout(() => {
       this.shake = false;
     }, 800);

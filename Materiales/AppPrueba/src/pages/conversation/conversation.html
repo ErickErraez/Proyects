@@ -4,14 +4,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="friend">
-      <span class="userName">{{friend.nick}}</span>
-      ({{friend.status}})
+      <span class="userName">{{friend.nick}}</span> ({{friend.status}})
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-
-<ion-content [ngClass]="{'shaker':shake}">
+<ion-content [ngClass]="{'shaker': shake}">
   <div class="bgWhite" margin padding>
     <div class="messageGroup">
       <ng-container>
@@ -21,39 +19,36 @@
   </div>
 
   <ion-fab right middle>
-    <button ion-fab>
-      <ion-icon name="send"></ion-icon>
-    </button>
+    <button ion-fab><ion-icon name="send"></ion-icon></button>
     <ion-fab-list side="top">
       <button outline ion-fab (click)="sendZumbido()">
-        <img src="../../assets/img/zumbido.png" width="50%" height="auto">
+        <ion-label>Enviar Zumbido</ion-label>
+        <img src="assets/img/zumbido.png" alt="">
       </button>
     </ion-fab-list>
     <ion-fab-list side="bottom">
       <button color="dark" ion-fab>
-        <ion-icon name="camera"></ion-icon>
-      </button>
+        <ion-label>Enviar Foto</ion-label>
+        <ion-icon name="camera"></ion-icon></button>
       <button color="dark" ion-fab>
-        <ion-icon name="images"></ion-icon>
-      </button>
+        <ion-label>Enviar desde Album</ion-label>
+        <ion-icon name="images"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 
-  <div class="message" *ngFor="let message of conversation">
-    <div *ngIf="message.type==='text'">
-      <b>{{getUserNickById(message.sender)}}</b> dice: {{message.content}}
+  <div class="message" *ngFor="let m of conversation">
+    <div *ngIf="m.type === 'text'">
+      <b>{{getUserNickById(m.sender)}}</b> dice: {{m.text}}
     </div>
-    <div *ngIf="message.type==='zumbido'">
-      <b>{{getUserNickById(message.sender)}}</b> dice: Ha enviado un Zumbido
+    <div *ngIf="m.type === 'zumbido'">
+      <b>{{getUserNickById(m.sender)}}</b> ha enviado un zumbido
     </div>
   </div>
-
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()" class="footbarInput"
-      autofocus></ion-input>
+    <ion-input [(ngModel)]="message" type="text" class="footbarInput" (keyup.enter)="sendMessage()" autofocus></ion-input>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="sendMessage()">
         <ion-icon name="send"></ion-icon>

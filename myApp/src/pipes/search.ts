@@ -8,10 +8,10 @@ export class SearchPipe implements PipeTransform {
 
     public transform(value, args: string) {
         if (!value) {
-            return;
+            return console.log("sin value");
         }
         if (!args) {
-            return value;
+            return console.log(value);
         }
 
         args = args.toLowerCase();

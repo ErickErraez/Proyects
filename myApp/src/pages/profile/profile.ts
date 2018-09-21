@@ -1,10 +1,5 @@
 import { Component } from "@angular/core";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ToastController
-} from "ionic-angular";
+import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 import { User, Status } from "../../interfaces/user";
 import { AuthService } from "../../providers/services-user/services-auth";
 import { ServicesUserProvider } from "../../providers/services-user/services-user";
@@ -19,30 +14,15 @@ import { LoginPage } from '../login/login';
   templateUrl: "profile.html"
 })
 export class ProfilePage {
-  user: User = {
-    nick: "",
-    status: Status.Online,
-    active: true,
-    email: "",
-    uid: "",
-    direccion: ""
-  };
 
-  status = Status;
-  currentPictureId: any = {};
-  position: any;
-  //aumentar GEOLOCATION
 
-  constructor(
-    public camera: Camera,
-    public geolocation: Geolocation,
-    public toastCtrl: ToastController,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private authService: AuthService,
-    public userServices: ServicesUserProvider,
-    private httpClient: HttpClient
-  ) {
+  user: User;
+  pictureId: any;
+  location: any;
+
+  constructor(public camera: Camera, public geolocation: Geolocation, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams,
+    private authService: AuthService, public userServices: ServicesUserProvider, private httpClient: HttpClient) {
+
     this.authService.getStatus().subscribe(
       data => {
         this.userServices
@@ -69,8 +49,8 @@ export class ProfilePage {
   }
 
   guardarPerfil() {
-    if (this.position) {
-      this.user.direccion = this.position;
+    if (this.location) {
+      this.user.direccion = this.location;
     }
     this.userServices
       .update(this.user)
@@ -99,36 +79,25 @@ export class ProfilePage {
         mediaType: this.camera.MediaType.PICTURE,
         allowEdit: true
       };
-      cameraOptions.sourceType =
-        source == "camera"
-          ? this.camera.PictureSourceType.CAMERA
-          : this.camera.PictureSourceType.PHOTOLIBRARY;
+      cameraOptions.sourceType = (source === 'camera') ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY;
       const result = await this.camera.getPicture(cameraOptions);
-      const image = "data:image/jpeg;base64,${result}";
-      this.currentPictureId = Date.now();
-      this.userServices
-        .uploadPicture(this.currentPictureId + ".jpg", image)
-        .then(data => {
-          this.userServices
-            .getDownloadURL(this.currentPictureId + ".jpg")
-            .subscribe(
-              url => {
-                this.user.avatar = url;
-                let toast = this.toastCtrl.create({
-                  message: "Foto subida con exito",
-                  duration: 3000,
-                  position: "bottom"
-                });
-                toast.present();
-              },
-              error => {
-                console.log(error);
-              }
-            );
-        })
-        .catch(error => {
+      const image = 'data:image/jpeg;base64,' + result;
+      this.pictureId = Date.now();
+      this.userServices.uploadPicture(this.pictureId + '.jpg', image).then((data) => {
+        this.userServices.getDownloadURL(this.pictureId + '.jpg').subscribe((url) => {
+          this.user.avatar = url;
+          let toast = this.toastCtrl.create({
+            message: 'Foto subida',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+        }, (error) => {
           console.log(error);
-        });
+        })
+      }).catch((error) => {
+        console.log(error);
+      });
     } catch (e) {
       console.error(e);
     }
@@ -140,27 +109,18 @@ export class ProfilePage {
   }
 
   getLocation() {
-    this.geolocation
-      .getCurrentPosition()
-      .then(resp => {
-        this.httpClient
-          .get(
-            "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-            resp.coords.latitude +
-            "," +
-            resp.coords.longitude +
-            "&sensor=true&key=AIzaSyC5Cd6Tiu3oqs69v1GDk5_aTCwOk8B8ZIM"
-          )
-          .subscribe(
-            (data: any) => {
-              console.log(data.results[0].formatted_address);
-              this.position = data.results[0].formatted_address;
-            },
-            error => {
-              console.log(error);
-            }
-          );
-      })
+    this.geolocation.getCurrentPosition().then(resp => {
+      this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + resp.coords.latitude + "," + resp.coords.longitude + "&sensor=true&key=AIzaSyC5Cd6Tiu3oqs69v1GDk5_aTCwOk8B8ZIM")
+        .subscribe(
+          (data: any) => {
+            console.log(data.results[0].formatted_address);
+            this.location = data.results[0].formatted_address;
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    })
       .catch(error => {
         console.log("Error getting location", error);
       });

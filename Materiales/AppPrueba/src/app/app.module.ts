@@ -1,37 +1,31 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { ErrorHandler, NgModule } from "@angular/core";
-import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { MyApp } from "./app.component";
-import { HomePage } from "../pages/home/home";
-import { ListPage } from "../pages/list/list";
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
 
-import { AngularFireModule } from "@angular/fire";
-import {
-  AngularFireDatabaseModule,
-  AngularFireDatabase
-} from "@angular/fire/database";
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import {
-  AngularFireStorageModule,
-  AngularFireStorage
-} from "@angular/fire/storage";
-import { HttpClientModule } from "@angular/common/http";
-
-import { StatusBar } from "@ionic-native/status-bar";
-import { SplashScreen } from "@ionic-native/splash-screen";
-import { LoginPage } from "../pages/login/login";
-import { ConversationPage } from "../pages/conversation/conversation";
-import { ProfilePage } from "../pages/profile/profile";
-import { ServicesUserProvider } from "../providers/services-user/services-user";
-import { SearchPipe } from "../pipes/search";
-import { FormsModule } from "@angular/forms";
-import { AuthService } from "../providers/services-user/services-auth";
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from '../pages/login/login';
+import { ConversationPage } from '../pages/conversation/conversation';
+import { UserService } from '../services/user';
+import { SearchPipe } from '../pipes/search';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from "../services/auth";
+import { ProfilePageModule } from "../pages/profile/profile.module";
+import { AngularFireStorageModule } from "angularfire2/storage";
 import { Camera } from "@ionic-native/camera";
-import { Vibration } from "@ionic-native/vibration";
 import { Geolocation } from "@ionic-native/geolocation";
-import { ConversationProvider } from "../providers/services-user/conversation";
-import { RequestProvider } from '../providers/services-user/request';
+import { HttpClientModule } from "@angular/common/http";
+import { ConversationService } from "../services/conversation";
+import { Vibration } from "@ionic-native/vibration";
+import { RequestService } from "../services/request";
+import { ComponentsModule } from "../components/components.module";
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBY8hKyelzenloXFG6de56yKFS4UZHli4U",
@@ -49,18 +43,18 @@ export const firebaseConfig = {
     ListPage,
     LoginPage,
     ConversationPage,
-    ProfilePage,
     SearchPipe
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ProfilePageModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,23 +62,19 @@ export const firebaseConfig = {
     HomePage,
     ListPage,
     LoginPage,
-    ConversationPage,
-    ProfilePage
+    ConversationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ServicesUserProvider,
+    UserService,
     AuthService,
-    Geolocation,
     Camera,
-    ServicesUserProvider,
-    AuthService,
-    ConversationProvider,
+    Geolocation,
+    ConversationService,
     Vibration,
-    RequestProvider
+    RequestService
   ]
 })
 export class AppModule { }

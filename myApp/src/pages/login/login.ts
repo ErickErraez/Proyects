@@ -28,7 +28,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: ServicesUserProvider, private toastCtrl: ToastController) {
   }
   registerWithEmail() {
-    if (this.password !== this.password2) {
+    if (this.password != this.password2) {
       alert('Las contraseñas no coinciden');
       return;
     }

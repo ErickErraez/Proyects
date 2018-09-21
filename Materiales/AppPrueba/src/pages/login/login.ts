@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Status, User } from '../../interfaces/user';
-import { HomePage } from '../home/home';
-import { AuthService } from '../../providers/services-user/services-auth';
-import { ServicesUserProvider } from '../../providers/services-user/services-user';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
+import {HomePage} from "../home/home";
+import {Status, User} from "../../interfaces/user";
+import {AuthService} from "../../services/auth";
+import {UserService} from "../../services/user";
 
 /**
  * Generated class for the LoginPage page.
@@ -12,23 +12,21 @@ import { ServicesUserProvider } from '../../providers/services-user/services-use
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
   password: string;
   password2: string;
   email: string;
   status: Status;
   nick: string;
   operation: string = 'login';
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: ServicesUserProvider, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: UserService, private toastCtrl: ToastController) {
   }
   registerWithEmail() {
-    if (this.password !== this.password2) {
+    if(this.password !== this.password2) {
       alert('Las contraseñas no coinciden');
       return;
     }
@@ -41,7 +39,6 @@ export class LoginPage {
         active: true
       };
       this.userService.add(user).then((data) => {
-        console.log(data);
         let toast = this.toastCtrl.create({
           message: 'Usuario registrado con éxito',
           duration: 3000,
@@ -49,7 +46,7 @@ export class LoginPage {
         });
         toast.present();
         this.operation = 'login';
-        this.navCtrl.setRoot(HomePage);
+        console.log(data);
       }).catch((error) => {
         alert('Ocurrió un error');
         console.log(error);
@@ -73,43 +70,6 @@ export class LoginPage {
       console.log(error);
     })
   }
-  facebookAuth() {
-    this.authService.facebookAuth().then((data) => {
-      console.log(data);
-      const user: User = {
-        nick: data.user.displayName,
-        email: data.user.email,
-        status: Status.Online,
-        uid: data.user.uid,
-        active: true
-      };
-      if (data.additionalUserInfo.isNewUser) {
-        this.userService.add(user).then((data) => {
-          let toast = this.toastCtrl.create({
-            message: 'Conectado a Facebook con éxito',
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
-          this.navCtrl.setRoot(HomePage);
-        }).catch((error) => {
-          alert('Ocurrió un error');
-          console.log(error);
-        });
-      } else {
-        let toast = this.toastCtrl.create({
-          message: 'Facebook Login Exitoso',
-          duration: 3000,
-          position: 'bottom'
-        });
-        toast.present();
-        this.navCtrl.setRoot(HomePage);
-      }
-    }).catch((error) => {
-      alert('Ocurrió un error');
-      console.log(error);
-    })
-  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
@@ -119,5 +79,40 @@ export class LoginPage {
   backToHome() {
     this.navCtrl.pop();
   }
-
+  loginWithFacebook() {
+    this.authService.facebookLogin().then((data:any) => {
+      //user.uid additionalUserInfo.isNewUser additionalUserInfo.picture.data.url additionalUserInfo.first_name additionalUserInfo.last_name additionalUserInfo.profile.email
+      if(data.additionalUserInfo.isNewUser) {
+        const user:User = {
+          nick: data.additionalUserInfo.profile.first_name + ' ' + data.additionalUserInfo.profile.last_name,
+          active: true,
+          status: Status.Online,
+          uid: data.user.uid,
+          email: data.additionalUserInfo.profile.email
+        };
+        this.userService.add(user).then((data) => {
+          let toast = this.toastCtrl.create({
+            message: 'Bienvenido (Registro Exitoso)',
+            duration: 3000,
+            position: 'bottom'
+          });
+          toast.present();
+          this.navCtrl.setRoot(HomePage);
+        }).catch((error) => {
+          console.log(error);
+        });
+      } else {
+        let toast = this.toastCtrl.create({
+          message: 'Bienvenido',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+        this.navCtrl.setRoot(HomePage);
+      }
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 }
