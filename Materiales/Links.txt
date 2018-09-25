@@ -12,3 +12,15 @@ https://sweetalert2.github.io/#download
 
 ICONOS
 https://fontawesome.com/icons?d=gallery&m=free
+
+RESPALDO
+https://github.com/JuanDiegoLopez?tab=repositories
+
+PARA CONVERTIR EN APP DE DESKTOP 
+https://coursetro.com/posts/code/125/Angular-5-Electron-Tutorial
+
+HACER EJECUTABLE UNA PAGINA WEB HECHA CON IONIC
+https://github.com/electron-userland/electron-packager
+
+SWEET ALERTS
+https://sweetalert.js.org/guides/

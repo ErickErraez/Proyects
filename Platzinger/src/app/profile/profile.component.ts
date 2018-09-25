@@ -41,7 +41,10 @@ export class ProfileComponent implements OnInit {
           this.userService.setAvatar(p, this.user.uid).then(() => {
             console.log('Cambios guardados correctamente');
           }).catch((error) => {
-            alert('Hubo un error al tratar de subir la imagen');
+            swal({
+              title: 'Ocurrio un Error!',
+              icon: 'error',
+            });
             console.log(error);
           });
         });
@@ -49,16 +52,28 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       });
       this.userService.editUser(this.user).then(() => {
-        alert('Cambios guardados correctamente');
+        swal({
+          title: 'Cambios Guardados Correctamente!',
+          icon: 'success',
+        });
       }).catch((error) => {
-        alert('Hubo un error');
+        swal({
+          title: 'Ocurrio un Error!',
+          icon: 'error',
+        });
         console.log(error);
       });
     } else {
       this.userService.editUser(this.user).then(() => {
-        alert('Cambios guardados correctamente');
+        swal({
+          title: 'Cambios Guardados Correctamente!',
+          icon: 'success',
+        });
       }).catch((error) => {
-        alert('Hubo un error');
+        swal({
+          title: 'Ocurrio un Error!',
+          icon: 'error',
+        });
         console.log(error);
       });
     }

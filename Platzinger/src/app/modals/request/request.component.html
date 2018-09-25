@@ -1,0 +1,43 @@
+<div class="modal-dialog modal-lg" *ngIf="user">
+  <div class="modal-content">
+    <div class="modal-header">
+      Nueva Solicitud
+      <a class="closeButton" (click)="close()">x</a>
+    </div>
+    <div class="modal-body" style="height: auto">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="avatarFrameonline">
+            <img [src]="user.avatar || 'assets/img/generic_avatar.png'" alt="Avatar" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-9">
+          <b>{{ user.nick }}</b>
+          <br>
+          <small>{{ user.email }}</small>
+          <br>
+          <small>Te ha enviado una solicitud de amistad</small>
+        </div>
+        <hr />
+        <div class="col-md-12">
+          <br>
+          <h4>Deseas agregar a esta persona?</h4>
+          <input type="radio" name="addToMsn" [(ngModel)]="shouldAdd" value="yes" id="add-yes"> <label for="add-yes">Si
+            quiero agregarlo</label> <br />
+
+          <input type="radio" name="addToMsn" [(ngModel)]="shouldAdd" value="no" id="add-no"> <label for="add-no">No
+            quiero agregarlo</label> <br />
+
+          <input type="radio" name="addToMsn" [(ngModel)]="shouldAdd" value="later" id="add-later"> <label for="add-later">Decido
+            despues</label> <br />
+        </div>
+      </div>
+      <br>
+      <div>
+        <a class="btn btn-primary" (click)="accept()">Ok</a>
+        <a class="btn btn-danger" (click)="close()">Cerrar</a>
+      </div>
+    </div>
+
+  </div>
+</div>

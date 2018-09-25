@@ -26,7 +26,7 @@ export class RequestProvider {
 
   getRequestForEmail(email) {
     const cleanEmail = email.replace(/\./g, ',');
-    return this.angularFDB.list('requests/' + cleanEmail)
+    return this.angularFDB.list('requests/' + cleanEmail);
   }
 
 }

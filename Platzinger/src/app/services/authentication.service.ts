@@ -28,7 +28,7 @@ export class AuthenticationService {
     return this.angularFireAuth.auth.signInWithPopup(provider);
   }
 
-  logout() {
+  logOut() {
     return this.angularFireAuth.auth.signOut();
   }
 
