@@ -16,6 +16,7 @@ export class HomePage {
   query: string;
   status = Status;
   user: User;
+  nick: any;
   constructor(public navCtrl: NavController, public userService: ServicesUserProvider, private alertController: AlertController, private authService: AuthService, private requestService: RequestProvider, public toastController: ToastController) {
     const usersObservable = this.userService.get();
     usersObservable.valueChanges().subscribe((data: User[]) => {
@@ -25,14 +26,17 @@ export class HomePage {
       console.log(error);
     });
     this.authService.getStatus().subscribe((session) => {
+      this.nick = session;
       if (!session) {
-        return;
+
       }
       if (!session.uid) {
         return;
       }
       this.userService.getById(session.uid).valueChanges().subscribe((user: User) => {
         this.user = user;
+        this.nick = this.user.nick
+        console.log(this.user);
         this.user.friends = Object.keys(this.user.friends).map(key => this.user.friends[key]);
         console.log(this.user);
       }, (error) => {
@@ -43,7 +47,7 @@ export class HomePage {
 
 
   goToConversation() {
-    this.navCtrl.push(ConversationPage, {data:this.users });
+    this.navCtrl.push(ConversationPage, { data: this.users });
   }
   sendRequest() {
     const prompt = this.alertController.create({

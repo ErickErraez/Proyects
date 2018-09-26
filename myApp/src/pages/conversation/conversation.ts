@@ -68,8 +68,6 @@ export class ConversationPage {
 
   getConversation() {
     this.conversationServices.getById(this.conversationId).valueChanges().subscribe((success) => {
-      console.log(success);
-      this.prueb(success);
       this.conversation = success;
     }, (error) => {
       console.log(error);
@@ -108,19 +106,6 @@ export class ConversationPage {
     }).catch((error) => {
       console.log(error);
     });
-  }
-
-  prueb(success) {
-    for (var i = 0; i < success.length; i++) {
-      if (this.user.uid == success[i].sender) {
-        console.log(success[i].sender + " dice: " + success[i].content);
-        this.idFRIEND = false;
-        this.valor = 'recevided';
-      } else {
-        this.idFRIEND = true;
-        this.valor = 'recevided';
-      }
-    }
   }
 
 }
