@@ -8,6 +8,7 @@ export class GuardServices implements CanActivate {
     constructor(private autorizacionService: AutorizacionServices) {
         this.autorizacionService.isLogged()
             .subscribe((response) => {
+                console.log(response);
                 if (response && response.uid) {
                     this.loggedIn = true;
                 } else {

@@ -41,6 +41,7 @@ export class MyApp {
 
     this.authService.getStatus().subscribe((session) => {
       if (session != null) {
+        this.nav.setRoot(HomePage);
         this.userService.getById(session.uid).valueChanges().subscribe((user: User) => {
           this.user = user;
           this.getFriendsRequest();
@@ -72,7 +73,6 @@ export class MyApp {
 
   getFriendsRequest() {
     this.requestServices.getRequestForEmail(this.user.email).valueChanges().subscribe((request: any) => {
-      console.log(request);
       this.request = request;
       this.request = this.request.filter((r) => {
         return r.status != 'accepted' && r.status != 'rejected'

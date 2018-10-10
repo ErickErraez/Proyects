@@ -16,9 +16,20 @@ export class AuthenticationService {
   }
 
   loginWithEmail(emai: string, password: string) {
-    return this.angularFireAuth.auth.signInWithEmailAndPassword(emai, password);
+    if (emai == null) {
+       swal({
+        title: 'Falta el Email!',
+        icon: 'error',
+      });
+    } else if (password == null) {
+       swal({
+        title: 'Falta la Contraseña!',
+        icon: 'error',
+      });
+    } else {
+      return this.angularFireAuth.auth.signInWithEmailAndPassword(emai, password);
+    }
   }
-
   registerWithEmail(emai: string, password: string) {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(emai, password);
   }

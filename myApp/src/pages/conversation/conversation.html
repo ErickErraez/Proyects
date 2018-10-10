@@ -38,19 +38,15 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-
-  <div class="message" *ngFor="let message of conversation">
-    <div *ngIf="message.type==='text'">
-      <b><label class="prueba" >{{getUserNickById(message.recevided)}}</label></b>
-    <br>
-    <b><label class="prueba1">{{getUserNickById(message.sender)}}</label></b> dice: {{message.content}}
-    
-    </div>
-    <div *ngIf="message.type==='zumbido'">
-      <b>{{getUserNickById(message.sender)}}</b> dice: Ha enviado un Zumbido
+  <div #scrollBox class="conversation-box" [scrollTop]="scrollBox.scrollHeight">
+    <div class="message-group" *ngFor="let message of conversation">
+      <div *ngIf="message.type === 'text'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">{{
+        message.content }}</div>
+      <div *ngIf="message.type==='zumbido'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">
+        <b>{{getUserNickById(message.sender)}}</b> Ha enviado un Zumbido
+      </div>
     </div>
   </div>
-
 </ion-content>
 
 <ion-footer>
