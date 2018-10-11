@@ -16,8 +16,8 @@
   <ion-grid id="homeMeContainer">
     <ion-row>
       <ion-col col-3>
-        <div class="avatarFrameonline">
-          <img src="assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        <div class="avatarFrameonline" *ngIf="user">
+          <img src="this.user.avatar || '../../../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
         </div>
       </ion-col>
       <ion-col col-9 padding>

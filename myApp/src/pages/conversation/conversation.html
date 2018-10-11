@@ -11,25 +11,27 @@
 </ion-header>
 
 
-<ion-content [ngClass]="{'shaker':shake}">
-  <div class="bgWhite" margin padding>
-    <div class="messageGroup">
-      <ng-container>
-
-      </ng-container>
+<ion-content [ngClass]="{'shaker':shake}" class="backgroundContent">
+  <div #scrollBox class="conversation-box" [scrollTop]="scrollBox.scrollHeight">
+    <div class="message-group" *ngFor="let message of conversation">
+      <div *ngIf="message.type === 'text'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">
+        {{message.content}}</div>
+      <div *ngIf="message.type==='zumbido'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">
+        <b>{{getUserNickById(message.sender)}}</b> Ha enviado un Zumbido
+      </div>
     </div>
   </div>
+</ion-content>
 
-  <ion-fab right middle>
-    <button ion-fab>
-      <ion-icon name="send"></ion-icon>
+<ion-footer class="foo">
+  <ion-fab bottom left class="fabPosition">
+    <button ion-fab mini outline color="oculto">
+      <ion-icon name="attach"></ion-icon>
     </button>
     <ion-fab-list side="top">
       <button outline ion-fab (click)="sendZumbido()">
-        <img src="../../assets/img/zumbido.png" width="50%" height="auto">
+        <img src="../../assets/img/zumbido.png" width="100%" height="auto">
       </button>
-    </ion-fab-list>
-    <ion-fab-list side="bottom">
       <button color="dark" ion-fab>
         <ion-icon name="camera"></ion-icon>
       </button>
@@ -38,25 +40,18 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-  <div #scrollBox class="conversation-box" [scrollTop]="scrollBox.scrollHeight">
-    <div class="message-group" *ngFor="let message of conversation">
-      <div *ngIf="message.type === 'text'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">{{
-        message.content }}</div>
-      <div *ngIf="message.type==='zumbido'" class="message" [ngClass]="user.uid == message.sender ? 'me-message' : 'friend-message'">
-        <b>{{getUserNickById(message.sender)}}</b> Ha enviado un Zumbido
-      </div>
-    </div>
-  </div>
-</ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-input type="text" [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()" class="footbarInput"
-      autofocus></ion-input>
-    <ion-buttons end>
-      <button ion-button icon-only color="primary" (click)="sendMessage()">
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+  <ion-grid>
+    <ion-row padding>
+      <ion-col col-11>
+        <ion-input type="text" placeholder="Escribe un mensaje" [(ngModel)]="message" name="message" (keyup.enter)="sendMessage()"
+          class="footbarInput" autofocus></ion-input>
+      </ion-col>
+      <ion-col col-1>
+        <button ion-button round color="dark" (click)="sendMessage()" class="buttonSend">
+            <span class="ocultarse">.</span><ion-icon class="iconSend" name="send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br>
 </ion-footer>
