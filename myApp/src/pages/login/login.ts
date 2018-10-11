@@ -22,7 +22,7 @@ export class LoginPage {
   password: string;
   password2: string;
   email: string;
-  status: Status;
+  status: any;
   nick: string;
   operation: string = 'login';
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: ServicesUserProvider, private toastCtrl: ToastController) {
@@ -30,16 +30,17 @@ export class LoginPage {
   registerWithEmail() {
     if (this.password != this.password2) {
       alert('Las contraseñas no coinciden');
-      return;
     }
     this.authService.registerWithEmail(this.email, this.password).then((data) => {
       const user: User = {
         nick: this.nick,
         email: this.email,
         status: this.status,
+        friends: null,
         uid: data.user.uid,
         active: true
-      };
+      }
+      console.log(user);
       this.userService.add(user).then((data) => {
         console.log(data);
         let toast = this.toastCtrl.create({

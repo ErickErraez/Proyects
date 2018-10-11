@@ -4,9 +4,15 @@ page-home {
     margin-bottom: 15px;
     padding-bottom: 10px;
     font-size: 1.2em;
-    text-shadow: 1px 2px 5px white;
   }
-  .searchBoxContainer{
+  .colorMenu {
+    color: rgb(255, 255, 255);
+  }
+  .backgroundHome {
+    background-image: url("../../assets/img/fondoMenu.jpg");
+    background-size: contain;
+  }
+  .searchBoxContainer {
     border: 1px solid #9dd8f4 !important;
     background: #3bb2ea;
     padding: 5px;
@@ -24,8 +30,12 @@ page-home {
     width: 20px;
     margin-right: 15px;
   }
+  .status {
+    width: 20px;
+    margin-right: 15px;
+  }
   .contact-offline {
     background-color: gray;
-    opacity: .5;
+    opacity: 0.5;
   }
 }

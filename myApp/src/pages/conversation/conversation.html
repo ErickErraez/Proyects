@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="colorNavbar">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="friend">
-      <span class="userName">{{friend.nick}}</span>
-      ({{friend.status}})
+    <ion-title *ngIf="friend"><small class="userName">{{friend.nick}} <img src="assets/img/{{getIcon(friend.status)}}"
+          class="status"></small>
+      <br>
+      <b *ngIf="friend.state !== undefined">
+        <small class="marquee">{{friend.state}}</small>
+      </b>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -29,7 +32,7 @@
       <ion-icon name="attach"></ion-icon>
     </button>
     <ion-fab-list side="top">
-      <button outline ion-fab (click)="sendZumbido()">
+      <button outline ion-fab color="dark" (click)="sendZumbido()">
         <img src="../../assets/img/zumbido.png" width="100%" height="auto">
       </button>
       <button color="dark" ion-fab>
@@ -48,7 +51,8 @@
       </ion-col>
       <ion-col col-1>
         <button ion-button round color="dark" (click)="sendMessage()" class="buttonSend">
-            <span class="ocultarse">.</span><ion-icon class="iconSend" name="send"></ion-icon>
+          <span class="ocultarse">.</span>
+          <ion-icon class="iconSend" name="send"></ion-icon>
         </button>
       </ion-col>
     </ion-row>

@@ -9,6 +9,7 @@ export interface User {
   nick: string;
   subnick?: string;
   friends?: any;
+  state?: any;
   age?: number;
   active: boolean;
   status: Status;

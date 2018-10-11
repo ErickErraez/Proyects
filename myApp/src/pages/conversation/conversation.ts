@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { HomePage } from "../home/home";
-import { User } from "../../interfaces/user";
+import { User, Status } from '../../interfaces/user';
 import { ServicesUserProvider } from "../../providers/services-user/services-user";
 import { AuthService } from "../../providers/services-user/services-auth";
 import { ConversationProvider } from '../../providers/services-user/conversation';
 import { Vibration } from '@ionic-native/vibration';
+import { FriendComponent } from '../../components/friend/friend';
 
 
 @IonicPage()
@@ -16,17 +17,21 @@ import { Vibration } from '@ionic-native/vibration';
 export class ConversationPage {
   user: User;
   friend: User;
+  estado: Status;
   conversationId: any;
   message: string;
   conversation: any;
   shake: boolean;
   idFRIEND: any;
   valor: any;
+  state: any;
 
-  constructor(public navCtrl: NavController, public authService: AuthService, public vibration: Vibration, public navParams: NavParams, private userProvider: ServicesUserProvider, public conversationServices: ConversationProvider) {
+  constructor(public navCtrl: NavController, public authService: AuthService, public vibration: Vibration,
+    public navParams: NavParams, private userProvider: ServicesUserProvider, public conversationServices: ConversationProvider) {
 
     this.friend = this.navParams.get("data");
-    console.log(this.friend);
+    this.state = this.friend.status;
+    console.log(this.state);
     this.authService.getStatus().subscribe(
       data => {
         this.userProvider.getById(data.uid).valueChanges().subscribe((user: User) => {
@@ -91,6 +96,28 @@ export class ConversationPage {
     window.setTimeout(() => {
       this.shake = false;
     }, 800);
+  }
+
+  getIcon(status) {
+    let icon = '';
+    switch (status) {
+      case Status.Online:
+        icon = 'logo_live_online.png';
+        break;
+      case Status.Offline:
+        icon = 'logo_live_offline.png';
+        break;
+      case Status.Busy:
+        icon = 'logo_live_busy.png';
+        break;
+      case Status.AppearOffline:
+        icon = 'logo_live_appear_offline.png';
+        break;
+      case Status.Away:
+        icon = 'logo_live_away.png';
+        break;
+    }
+    return icon;
   }
 
   sendZumbido() {

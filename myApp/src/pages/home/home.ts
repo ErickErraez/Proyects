@@ -14,9 +14,10 @@ import { RequestProvider } from '../../providers/services-user/request';
 export class HomePage {
   users: User[];
   query: string;
-  status = Status;
+  status: any;
   user: User;
   nick: any;
+  state: any = '';
   constructor(public navCtrl: NavController, public userService: ServicesUserProvider, private alertController: AlertController, private authService: AuthService, private requestService: RequestProvider, public toastController: ToastController) {
     const usersObservable = this.userService.get();
     usersObservable.valueChanges().subscribe((data: User[]) => {
@@ -35,8 +36,12 @@ export class HomePage {
       }
       this.userService.getById(session.uid).valueChanges().subscribe((user: User) => {
         this.user = user;
-        this.nick = this.user.nick
-        this.user.friends = Object.keys(this.user.friends).map(key => this.user.friends[key]);
+        this.status = this.user.status;
+        this.nick = this.user.nick;
+        this.state = this.user.state;
+        if (this.user.friends !== undefined) {
+          this.user.friends = Object.keys(this.user.friends).map(key => this.user.friends[key]);
+        }
       }, (error) => {
         console.log(error);
       })
@@ -46,6 +51,27 @@ export class HomePage {
 
   goToConversation() {
     this.navCtrl.push(ConversationPage, { data: this.users });
+  }
+  getIconByStatus(status) {
+    let icon = '';
+    switch (status) {
+      case Status.Online:
+        icon = 'logo_live_online.png';
+        break;
+      case Status.Offline:
+        icon = 'logo_live_offline.png';
+        break;
+      case Status.Busy:
+        icon = 'logo_live_busy.png';
+        break;
+      case Status.AppearOffline:
+        icon = 'logo_live_appear_offline.png';
+        break;
+      case Status.Away:
+        icon = 'logo_live_away.png';
+        break;
+    }
+    return icon;
   }
   sendRequest() {
     const prompt = this.alertController.create({

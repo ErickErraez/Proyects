@@ -27,7 +27,6 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ConversationProvider } from "../providers/services-user/conversation";
 import { RequestProvider } from '../providers/services-user/request';
 import { ComponentsModule } from '../components/components.module';
-
 export const firebaseConfig = {
   apiKey: "AIzaSyBY8hKyelzenloXFG6de56yKFS4UZHli4U",
   authDomain: "yavzinger.firebaseapp.com",

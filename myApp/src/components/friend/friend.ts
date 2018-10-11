@@ -26,6 +26,7 @@ export class FriendComponent implements OnInit {
   ngOnInit() {
     this.userService.getById(this.uid).valueChanges().subscribe((data: User) => {
       this.friend = data;
+      
     }, (error) => {
       console.log(error);
     });

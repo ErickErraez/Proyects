@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="colorNavbar">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -12,30 +12,30 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6 offset-3>
-        <div class="avatarFrameonline">
-          <img *ngIf="user" src="{{user.avatar || '../../../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        <div>
+          <img *ngIf="user" src="this.user.avatar || '../../../../assets/img/user.png" class="avatarImage img-fluid">
         </div>
       </ion-col>
     </ion-row>
-  <ion-row>
-    
-    <ion-item color='personal'>
+    <ion-row>
+
+      <ion-item color='personal'>
         <ion-col col-4>
-        <span>Cambiar Foto</span>
-      </ion-col>
-       <ion-col col-8>
+          <span>Cambiar Foto</span>
+        </ion-col>
+        <ion-col col-8>
           <ion-col col-2>
             <ion-icon class="camera" name="camera" (click)="takePicture('camera')"></ion-icon>
           </ion-col>
           <ion-col col-2>
-             <ion-icon class="album" name="images" (click)="takePicture('album')"></ion-icon>
+            <ion-icon class="album" name="images" (click)="takePicture('album')"></ion-icon>
           </ion-col>
           <ion-col col-2>
             <ion-icon class="ubicacion" name="navigate" (click)="getLocation()"></ion-icon>
           </ion-col>
-      </ion-col>
-    </ion-item>
-  </ion-row>
+        </ion-col>
+      </ion-item>
+    </ion-row>
   </ion-grid>
 
   <ion-list *ngIf="user">
@@ -51,9 +51,10 @@
     </ion-item>
 
     <ion-item color='personal'>
-      <ion-label floating color="dark">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="user.email" name="email" disabled></ion-input>
+      <ion-label floating color="dark">Estado</ion-label>
+      <ion-input type="text" [(ngModel)]="user.state" name="state"></ion-input>
     </ion-item>
+
 
     <ion-item color='personal'>
       <ion-label floating color="dark">Status</ion-label>
@@ -65,9 +66,9 @@
       </ion-select>
     </ion-item>
 
-    <ion-item color='personal' *ngIf="position">
-        <ion-label floating color="dark">Direccion:</ion-label>
-        <ion-input type="email" [(ngModel)]="this.position" name="this.position" style="font: size 1px;"></ion-input>
+    <ion-item color='personal' *ngIf="this.location">
+      <ion-label floating color="dark">Direccion:</ion-label>
+      <ion-input type="email" [(ngModel)]="this.location" name="this.location" style="font: size 1px;"></ion-input>
     </ion-item>
 
   </ion-list>

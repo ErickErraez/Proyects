@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="colorNavbar">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -12,27 +12,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="backgroundAmsnImg bluewhitebluebg">
+<ion-content padding class="backgroundHome">
+  
   <ion-grid id="homeMeContainer">
     <ion-row>
       <ion-col col-3>
-        <div class="avatarFrameonline" *ngIf="user">
-          <img src="this.user.avatar || '../../../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
+        <div *ngIf="user">
+          <img src="this.user.avatar || '../../../../assets/img/user.png" class="avatarImage img-fluid">
         </div>
       </ion-col>
-      <ion-col col-9 padding>
-        <div>
-          {{nick.uid}}</div><br />
-        <span>{{nick}}</span>
+      <ion-col col-9 padding color="oculto1">
+        <span class="colorMenu">{{nick}}</span><img src="assets/img/{{getIconByStatus(this.status)}}" class="status">
         <br />
-        <small>{{nick}}</small>
+        <b *ngIf="this.state !== ''" class="colorMenu"><small>{{this.state}}</small></b>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="user && user.friends">
-    <div>
+  <div *ngIf="user && user.friends !== undefined">
+    <div class="colorMenu">
       <b>Amigos ({{user.friends.length}}/{{user.friends.length}})</b>
+      <br>
     </div>
     <!-- <div class="contact-list-item" *ngFor="let user of users | search: query" (click)="goToConversation(user)">
       <b>{{user.nick}}</b> <i class="msnicon brb"></i>
@@ -40,7 +40,9 @@
     </div>
     <div>separador</div>-->
     <div *ngFor="let user of user.friends">
-      <friend [uid]="user"></friend>
+      <ion-item color='oculto1'>
+        <friend [uid]="user"></friend>
+      </ion-item>
     </div>
   </div>
 </ion-content>

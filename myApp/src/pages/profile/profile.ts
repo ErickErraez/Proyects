@@ -19,6 +19,7 @@ export class ProfilePage {
   user: User;
   pictureId: any;
   location: any;
+  state: any;
 
   constructor(public camera: Camera, public geolocation: Geolocation, public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams,
     private authService: AuthService, public userServices: ServicesUserProvider, private httpClient: HttpClient) {
@@ -49,8 +50,9 @@ export class ProfilePage {
   }
 
   guardarPerfil() {
-    if (this.location) {
+    if (this.location || this.state) {
       this.user.direccion = this.location;
+      this.user.state = this.state;
     }
     this.userServices
       .update(this.user)
@@ -113,8 +115,8 @@ export class ProfilePage {
       this.httpClient.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + resp.coords.latitude + "," + resp.coords.longitude + "&sensor=true&key=AIzaSyC5Cd6Tiu3oqs69v1GDk5_aTCwOk8B8ZIM")
         .subscribe(
           (data: any) => {
-            console.log(data.results[0].formatted_address);
             this.location = data.results[0].formatted_address;
+            console.log(this.location);
           },
           error => {
             console.log(error);
