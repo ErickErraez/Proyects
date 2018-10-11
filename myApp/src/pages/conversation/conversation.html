@@ -6,9 +6,9 @@
     <ion-title *ngIf="friend"><small class="userName">{{friend.nick}} <img src="assets/img/{{getIcon(friend.status)}}"
           class="status"></small>
       <br>
-      <b *ngIf="friend.state !== undefined">
-        <small class="marquee">{{friend.state}}</small>
-      </b>
+      <small *ngIf="friend.state !== undefined">
+          <marquee>{{friend.state}}</marquee>
+      </small>
     </ion-title>
   </ion-navbar>
 </ion-header>
