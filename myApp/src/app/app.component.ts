@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController, ToastController, Alert, AlertController } from 'ionic-angular';
+import { Nav, Platform, ModalController, ToastController, Alert, AlertController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -127,6 +127,11 @@ export class MyApp {
 
     alert.present();
 
+  }
+
+  logout() {
+    this.authService.logout();
+    this.nav.setRoot(LoginPage);
   }
 
 }

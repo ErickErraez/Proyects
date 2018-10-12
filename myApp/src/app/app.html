@@ -8,10 +8,21 @@
   <ion-content class="backgroundContent">
     <ion-list class="backgroundContent">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" color="personal">
-       <b class="titleMenu">{{p.title}}</b>
+        <b class="titleMenu">{{p.title}}</b>
       </button>
     </ion-list>
+
   </ion-content>
+  <ion-footer>
+    <ion-row>
+      <ion-col col-2></ion-col>
+      <ion-col col-8>
+        <button menuClose ion-item (click)="logout()" color="primary">
+          <ion-icon name="log-out"></ion-icon><span class="ocultarse">..</span>Cerrar Sesion
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
 
 </ion-menu>
 

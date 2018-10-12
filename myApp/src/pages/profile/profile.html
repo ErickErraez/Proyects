@@ -55,7 +55,6 @@
       <ion-input type="text" [(ngModel)]="user.state" name="state"></ion-input>
     </ion-item>
 
-
     <ion-item color='personal'>
       <ion-label floating color="dark">Status</ion-label>
       <ion-select [(ngModel)]="user.status" name="status">
@@ -66,15 +65,14 @@
       </ion-select>
     </ion-item>
 
-    <ion-item color='personal' *ngIf="this.location">
+    <ion-item color='personal' *ngIf="user.direccion">
       <ion-label floating color="dark">Direccion:</ion-label>
-      <ion-input type="email" [(ngModel)]="this.location" name="this.location" style="font: size 1px;"></ion-input>
+      <ion-input type="email" [(ngModel)]="user.direccion" name="direccion" style="font: size 1px;"></ion-input>
     </ion-item>
 
   </ion-list>
 
   <button ion-button full (click)="guardarPerfil()">Guardar</button>
-  <button ion-button full (click)="logout()">Cerrar Sesion</button>
 
 
 </ion-content>

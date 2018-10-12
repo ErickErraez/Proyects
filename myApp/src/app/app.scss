@@ -10,7 +10,7 @@
   background-position-y: 35px;
 }
 .backgroundContent {
-  background-color: #ffffff;
+  background-color: #b4b4b4;
 }
 .avatarFrameonline {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d2ff6b+0,81ff3d+50,0cff00+51,0dbc03+100 */
@@ -189,6 +189,9 @@
 .backgroudSocial {
   background-image: url(../assets/img/background.jpg);
   background-size: contain;
+}
+.ocultarse {
+  opacity: 0;
 }
 .status {
   width: 20px;

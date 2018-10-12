@@ -21,7 +21,7 @@
 
     <ion-item color='personal'>
       <ion-label floating color="dark">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+      <ion-input type="email" [(ngModel)]="email" name="email" (keyup)="mayus(email)"></ion-input>
     </ion-item>
 
     <ion-item color='personal'>
@@ -56,10 +56,3 @@
   </div>
 
 </ion-content>
-
-
-<!--
-    <ion-item color='personal'>
-      <ion-label color="dark">Recordarme</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>-->

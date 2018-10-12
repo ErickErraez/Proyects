@@ -20,8 +20,7 @@ export class FriendComponent implements OnInit {
   @Input() uid: string;
   friend: User;
   constructor(private navCtrl: NavController, private userService: ServicesUserProvider) {
-    console.log('Hello FriendComponent Component');
-    this.text = 'Hello World';
+   
   }
   ngOnInit() {
     this.userService.getById(this.uid).valueChanges().subscribe((data: User) => {
