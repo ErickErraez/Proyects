@@ -18,6 +18,7 @@ export class HomePage {
   user: User;
   nick: any;
   state: any = '';
+
   constructor(public navCtrl: NavController, public userService: ServicesUserProvider, private alertController: AlertController, private authService: AuthService, private requestService: RequestProvider, public toastController: ToastController) {
     const usersObservable = this.userService.get();
     usersObservable.valueChanges().subscribe((data: User[]) => {

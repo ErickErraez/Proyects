@@ -24,6 +24,8 @@ export class ConversationPage {
   shake: boolean;
   idFRIEND: any;
   valor: any;
+
+  toggled: boolean = false;
   state: any;
 
   constructor(public navCtrl: NavController, public authService: AuthService, public vibration: Vibration,
@@ -53,6 +55,10 @@ export class ConversationPage {
 
   goBack() {
     this.navCtrl.pop();
+  }
+
+  handleSelection(event) {
+    this.message = this.message + " " + event.char;
   }
 
   sendMessage() {

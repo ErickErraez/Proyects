@@ -5,4 +5,30 @@ page-login {
   #avatarLogin {
     margin-bottom: 30px;
   }
+  div#logo {
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .content {
+    background-color: color($colors, primary);
+  }
+  .item {
+    background-color: color($colors, primary);
+  }
+
+  ion-label {
+    color: color($colors, light);
+    text-align: center;
+    margin: 0;
+  }
+
+  .label {
+    margin: 0 0 5px 0;
+  }
+
+  ion-input {
+    background-color: #fff;
+    border-radius: 500px;
+    margin: 0 0 25px 0;
+  }
 }

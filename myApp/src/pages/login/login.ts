@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { Status, User } from '../../interfaces/user';
 import { HomePage } from '../home/home';
 import { AuthService } from '../../providers/services-user/services-auth';
 import { ServicesUserProvider } from '../../providers/services-user/services-user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Generated class for the LoginPage page.
@@ -25,8 +26,11 @@ export class LoginPage {
   email: string;
   status: any;
   nick: string;
-  operation: string = 'login';
+  opt: string = 'signin';
+  loginErrorString: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, public userService: ServicesUserProvider, private toastCtrl: ToastController) {
+
   }
   registerWithEmail() {
 
@@ -68,7 +72,6 @@ export class LoginPage {
             position: 'bottom'
           });
           toast.present();
-          this.operation = 'login';
           this.navCtrl.setRoot(HomePage);
         }).catch((error) => {
           console.log(error.code);

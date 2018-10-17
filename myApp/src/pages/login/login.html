@@ -1,58 +1,75 @@
-<ion-content padding class="backgroudSocial bposy0">
+<ion-content padding>
 
-  <div id="avatarLogin">
-    <ion-row>
-      <ion-col col-4></ion-col>
-      <ion-col col-4>
-        <div class="avatarFrameOffline">
-          <img src="../../assets/img/generic_avatar.png" class="avatarImage img-fluid">
-        </div>
-      </ion-col>
-      <ion-col col-4></ion-col>
-    </ion-row>
+  <div id="logo" padding text-center>
+    <img src="./assets/img/logo.png">
   </div>
-
-  <ion-list color='personal'>
-
-    <ion-item color='personal' *ngIf="operation === 'register'">
-      <ion-label floating color="dark">Nick</ion-label>
-      <ion-input type="text" [(ngModel)]="nick" name="nick"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal'>
-      <ion-label floating color="dark">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email" name="email" (keyup)="mayus(email)"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal'>
-      <ion-label floating color="dark">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal' *ngIf="operation === 'register'">
-      <ion-label floating color="dark">Repetir Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password2" name="password2"></ion-input>
-    </ion-item>
-
-    <ion-item color='personal' *ngIf="operation === 'register'">
-      <ion-label floating color="dark">Status</ion-label>
-      <ion-select [(ngModel)]="status" name="status">
-        <ion-option value="Online">Conectado</ion-option>
-        <ion-option value="Away">Ausente</ion-option>
-        <ion-option value="Busy">Ocupado</ion-option>
-        <ion-option value="AppearOffline">Desconectado</ion-option>
-      </ion-select>
-    </ion-item>
-
-  </ion-list>
 
   <div padding>
-    <span *ngIf="operation === 'register'">Ya tienes cuenta? <a (click)="operation = 'login'"><b>Click Aquí</b></a></span>
-    <span *ngIf="operation === 'login'">Aun no tienes cuenta? <a (click)="operation = 'register'"><b>Click Aquí</b></a></span>
-    <hr />
-    <button *ngIf="operation === 'login'" ion-button (click)="loginWithEmail()" block>Ingresar</button>
-    <button *ngIf="operation === 'register'" ion-button (click)="registerWithEmail()" block>Registrarse</button>
-
+    <ion-segment [(ngModel)]="opt" color="light">
+      <ion-segment-button value="signin">
+        Sign In
+      </ion-segment-button>
+      <ion-segment-button value="signup">
+        Sign Up
+      </ion-segment-button>
+    </ion-segment>
   </div>
 
+  <div [ngSwitch]="opt">
+    <form (submit)="loginWithEmail()" *ngSwitchCase="'signin'">
+
+      <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+
+
+
+      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+
+
+      <div padding text-center>
+        <button ion-button round color="light" icon-right>
+          SIGNIN <ion-icon name="log-in"></ion-icon>
+        </button>
+      </div>
+
+
+    </form>
+
+    <form (submit)="registerWithEmail()" *ngSwitchCase="'signup'">
+      <ion-label>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="nick" name="nick"></ion-input>
+
+
+      <ion-label float>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+
+
+      <ion-label float>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+
+
+
+      <ion-label float>Retry Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password2" name="password2"></ion-input>
+
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-select [(ngModel)]="status" name="status">
+          <ion-option value="Online">Conectado</ion-option>
+          <ion-option value="Away">Ausente</ion-option>
+          <ion-option value="Busy">Ocupado</ion-option>
+          <ion-option value="AppearOffline">Desconectado</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <div padding text-center>
+        <button ion-button round color="light" icon-right>
+          SIGNUP <ion-icon name="person-add"></ion-icon>
+        </button>
+      </div>
+
+
+    </form>
+
+  </div>
 </ion-content>

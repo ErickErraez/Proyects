@@ -7,7 +7,7 @@
           class="status"></small>
       <br>
       <small *ngIf="friend.state !== undefined">
-          <marquee>{{friend.state}}</marquee>
+        <marquee>{{friend.state}}</marquee>
       </small>
     </ion-title>
   </ion-navbar>
@@ -24,6 +24,7 @@
       </div>
     </div>
   </div>
+
 </ion-content>
 
 <ion-footer class="foo">
@@ -41,6 +42,11 @@
       <button color="dark" ion-fab>
         <ion-icon name="images"></ion-icon>
       </button>
+      <button outline ion-fab color="dark" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled"
+        [emojiPickerDirection]="'top'" (emojiPickerSelect)="handleSelection($event)">
+        🤗
+      </button>
+
     </ion-fab-list>
   </ion-fab>
   <ion-grid>
@@ -58,4 +64,9 @@
     </ion-row>
   </ion-grid>
   <br>
+
+
+  
+
+
 </ion-footer>

@@ -10,7 +10,6 @@ $font-path: "../assets/fonts";
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-
 @import "ionic.globals";
 
 // Shared Variables
@@ -27,18 +26,29 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-$fab-size: 30px; 
+$fab-size: 30px;
 $colors: (
   primary: #488aff,
   secondary: #32db64,
   danger: #f53d3d,
-  light: #f4f4f4,
+  light: (
+    base: #f7f7f7,
+    contrast: #306dd8
+  ),
+  dark-light: #ccc,
   dark: #222,
-  personal: rgba(245, 245, 245, 0.562),
+  personal: rgb(255, 0, 0),
   oculto: rgb(245, 245, 245),
   oculto1: rgba(68, 68, 68, 0.616),
   colorNavbar: #707070
 );
+$toolbar-background: color($colors, primary);
+$background-color: #f7f7f7;
+$text-color: #5d5d5d;
+$text-input-highlight-color-valid: #5fcfdb;
+
+
+
 
 // App iOS Variables
 // --------------------------------------------------

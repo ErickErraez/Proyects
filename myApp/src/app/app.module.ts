@@ -10,7 +10,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireDatabaseModule, AngularFireDatabase } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireStorageModule, AngularFireStorage } from "@angular/fire/storage";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { EmojiPickerModule } from '@ionic-tools/emoji-picker';
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -27,6 +28,9 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { ConversationProvider } from "../providers/services-user/conversation";
 import { RequestProvider } from '../providers/services-user/request';
 import { ComponentsModule } from '../components/components.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyBY8hKyelzenloXFG6de56yKFS4UZHli4U",
   authDomain: "yavzinger.firebaseapp.com",
@@ -35,6 +39,10 @@ export const firebaseConfig = {
   storageBucket: "yavzinger.appspot.com",
   messagingSenderId: "14622928629"
 };
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -49,12 +57,19 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     FormsModule,
-    IonicModule.forRoot(MyApp),
+    EmojiPickerModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp), TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    HttpClientModule,
     ComponentsModule
   ],
   bootstrap: [IonicApp],
